@@ -1,9 +1,5 @@
 package edu.miu.cs.cs544.controller.reservation;
 
-<<<<<<< HEAD
-public class ReservationController {
-
-=======
 import edu.miu.cs.cs544.domain.reservation.Reservation;
 import edu.miu.cs.cs544.domain.user.User;
 import edu.miu.cs.cs544.repository.appointment.AppointmentRepository;
@@ -46,7 +42,4 @@ public class ReservationController {
         return "redirect:getAppoints/";
     }
 
-
-
->>>>>>> f45fd4918833496944d5b3beb602930993c734d2
 }
