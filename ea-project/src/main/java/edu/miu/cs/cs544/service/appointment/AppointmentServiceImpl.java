@@ -15,7 +15,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 	@Autowired
 	private AppointmentRepository appointmentRepository;
-	
+
 	@Override
 	public void createAppointment(Appointment appointment) {
 		appointmentRepository.save(appointment);
@@ -31,17 +31,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 		return appointmentRepository.findById(id).orElse(null);
 	}
 
-<<<<<<< HEAD
 	@Override
 	public void updateAppointment(Integer id) {
 		Appointment appt = appointmentRepository.findById(id).orElse(null);
-		if(appt!=null) {
+		if (appt != null) {
 			appointmentRepository.save(appt);
 		}
 	}
-	
-=======
 
-
->>>>>>> 617526f3c1e236cc93ba514de262fb4f175294a4
 }

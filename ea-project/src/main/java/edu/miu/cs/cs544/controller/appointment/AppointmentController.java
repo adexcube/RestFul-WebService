@@ -22,34 +22,29 @@ import edu.miu.cs.cs544.service.user.UserService;
 public class AppointmentController {
 	@Autowired
 	private AppointmentService appointmentService;
-<<<<<<< HEAD
-	@Autowired UserService userService;
-	
-	@PostMapping(value="createappt/{id}")
+
+	@Autowired
+	UserService userService;
+
+	@PostMapping(value = "createappt/{id}")
 	public void createAppoinment(@PathVariable int id, @RequestBody Appointment appointment) {
 		try {
 			User user = userService.getUserById(id);
 			appointment.setProvider(user);
 			appointmentService.createAppointment(appointment);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-=======
-
-	public void createAppoinment(Appointment appointment) {
-		appointmentService.createAppointment(appointment);
->>>>>>> 617526f3c1e236cc93ba514de262fb4f175294a4
 	}
-	
-	@GetMapping(value="all", produces = MediaType.APPLICATION_JSON_VALUE)
+
+	@GetMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Response getAllAppointments() {
 		try {
 			return new Response(200, "successful", appointmentService.getAllAppointments());
-		}catch(Exception e) {
+		} catch (Exception e) {
 			return new Response(400, e.getMessage(), null);
-			
+
 		}
 	}
-
 
 }

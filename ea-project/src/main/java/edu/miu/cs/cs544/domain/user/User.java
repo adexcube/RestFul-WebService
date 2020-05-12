@@ -28,12 +28,8 @@ public class User {
 	private String firstname;
 	@NotEmpty
 	private String lastname;
-<<<<<<< HEAD
-//	@Email
-=======
 	@Email
 	@NotEmpty
->>>>>>> 617526f3c1e236cc93ba514de262fb4f175294a4
 	private String email;
 	private String gender;
 	@NotEmpty
