@@ -12,8 +12,4 @@ public class EaProjectApplication {
 		SpringApplication.run(EaProjectApplication.class, args);
 	}
 
-	@Bean
-	public RestTemplate restTemplate(){
-		return new RestTemplate();
-	}
 }
