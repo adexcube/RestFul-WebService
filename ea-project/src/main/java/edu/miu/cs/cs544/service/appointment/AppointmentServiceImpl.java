@@ -1,4 +1,4 @@
-package edu.miu.cs.cs544.service.appt_reservation;
+package edu.miu.cs.cs544.service.appointment;
 
 import java.util.List;
 
@@ -7,9 +7,6 @@ import org.springframework.stereotype.Service;
 
 import edu.miu.cs.cs544.domain.appointment.Appointment;
 import edu.miu.cs.cs544.repository.appointment.AppointmentRepository;
-import edu.miu.cs.cs544.service.appointment.AppointmentService;
-
-
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {

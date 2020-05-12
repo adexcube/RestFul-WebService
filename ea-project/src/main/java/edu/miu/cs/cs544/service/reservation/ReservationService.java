@@ -1,10 +1,10 @@
-package edu.miu.cs.cs544.service.appt_reservation;
+package edu.miu.cs.cs544.service.reservation;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import edu.miu.cs.cs544.domain.appt_reservation.Reservation;
+import edu.miu.cs.cs544.domain.reservation.Reservation;
 
 
 @Service

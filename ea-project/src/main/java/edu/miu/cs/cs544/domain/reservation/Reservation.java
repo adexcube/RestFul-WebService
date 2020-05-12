@@ -1,4 +1,4 @@
-package edu.miu.cs.cs544.domain.appt_reservation;
+package edu.miu.cs.cs544.domain.reservation;
 
 import java.time.LocalDate;
 
@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.springframework.beans.factory.annotation.Value;
+import edu.miu.cs.cs544.domain.appointment.Appointment;
 
 import edu.miu.cs.cs544.domain.user.User;
 
@@ -30,7 +30,13 @@ public class Reservation {
 	public Reservation() {
 		super();
 	}
-	
+
+	public Reservation(LocalDate localDate, User consumer){
+		super();
+		this.dateAndTime = dateAndTime;
+		this.consumer = consumer;
+	}
+
 	public Reservation(Status status, LocalDate dateAndTime, User consumer) {
 		super();
 		this.status = status;

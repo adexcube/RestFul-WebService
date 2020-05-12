@@ -2,17 +2,11 @@ package edu.miu.cs.cs544.service.response;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 
 
-import edu.miu.cs.cs544.domain.appt_reservation.Appointment;
-import edu.miu.cs.cs544.domain.appt_reservation.Reservation;
+import edu.miu.cs.cs544.domain.appointment.Appointment;
+import edu.miu.cs.cs544.domain.reservation.Reservation;
 import edu.miu.cs.cs544.domain.user.UserRole;
 
 public class UserResponse {
