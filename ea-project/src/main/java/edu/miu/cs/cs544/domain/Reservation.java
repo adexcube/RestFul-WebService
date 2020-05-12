@@ -1,4 +1,4 @@
-package edu.miu.cs.cs544.domain.reservation;
+package edu.miu.cs.cs544.domain;
 
 import java.time.LocalDate;
 
@@ -9,10 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import edu.miu.cs.cs544.domain.appointment.Appointment;
-
-import edu.miu.cs.cs544.domain.user.User;
 
 @Entity
 public class Reservation {

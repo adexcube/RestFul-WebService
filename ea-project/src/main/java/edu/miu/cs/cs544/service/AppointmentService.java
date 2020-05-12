@@ -1,12 +1,11 @@
-package edu.miu.cs.cs544.service.appointment;
+package edu.miu.cs.cs544.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import edu.miu.cs.cs544.domain.appointment.Appointment;
+import edu.miu.cs.cs544.domain.Appointment;
 
-@Service
 public interface AppointmentService {
 	public void createAppointment(Appointment appointment);
 	public List<Appointment> getAllAppointments();

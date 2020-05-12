@@ -1,4 +1,4 @@
-package edu.miu.cs.cs544.controller.user;
+package edu.miu.cs.cs544.controller;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.miu.cs.cs544.domain.user.UserRole;
-import edu.miu.cs.cs544.service.user.UserRoleService;
+import edu.miu.cs.cs544.domain.UserRole;
+import edu.miu.cs.cs544.service.UserRoleService;
 
 @RestController
 @RequestMapping("/userroles")

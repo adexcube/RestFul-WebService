@@ -1,14 +1,17 @@
-package edu.miu.cs.cs544.service.reservation;
+package edu.miu.cs.cs544.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import edu.miu.cs.cs544.domain.reservation.Reservation;
-import edu.miu.cs.cs544.repository.reservation.ReservationRepository;
+import edu.miu.cs.cs544.domain.Reservation;
+import edu.miu.cs.cs544.repository.ReservationRepository;
 
 @Service
+@Transactional(propagation = Propagation.REQUIRES_NEW)
 public class ReservationServiceImpl implements ReservationService {
 
 	@Autowired

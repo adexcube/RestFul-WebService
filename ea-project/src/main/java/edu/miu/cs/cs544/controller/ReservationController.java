@@ -1,13 +1,14 @@
-package edu.miu.cs.cs544.controller.reservation;
+package edu.miu.cs.cs544.controller;
 
-import edu.miu.cs.cs544.domain.appointment.Appointment;
-import edu.miu.cs.cs544.domain.reservation.Reservation;
-import edu.miu.cs.cs544.domain.reservation.Status;
-import edu.miu.cs.cs544.domain.user.User;
-import edu.miu.cs.cs544.repository.appointment.AppointmentRepository;
-import edu.miu.cs.cs544.service.appointment.AppointmentService;
-import edu.miu.cs.cs544.service.reservation.ReservationService;
-import edu.miu.cs.cs544.service.user.UserService;
+import edu.miu.cs.cs544.domain.Appointment;
+import edu.miu.cs.cs544.domain.Reservation;
+import edu.miu.cs.cs544.domain.Status;
+import edu.miu.cs.cs544.domain.User;
+import edu.miu.cs.cs544.repository.AppointmentRepository;
+import edu.miu.cs.cs544.service.AppointmentService;
+import edu.miu.cs.cs544.service.ReservationService;
+import edu.miu.cs.cs544.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

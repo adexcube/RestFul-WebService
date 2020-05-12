@@ -1,4 +1,4 @@
-package edu.miu.cs.cs544.domain.reservation;
+package edu.miu.cs.cs544.domain;
 
 public enum Status {
 	PENDING,

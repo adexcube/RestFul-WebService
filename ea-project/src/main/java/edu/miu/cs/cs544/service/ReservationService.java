@@ -1,13 +1,12 @@
-package edu.miu.cs.cs544.service.reservation;
+package edu.miu.cs.cs544.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import edu.miu.cs.cs544.domain.reservation.Reservation;
+import edu.miu.cs.cs544.domain.Reservation;
 
 
-@Service
 public interface ReservationService {
 	public void createReservation(Reservation reservation);
 	public List<Reservation> getAllReservations();

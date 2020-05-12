@@ -1,4 +1,4 @@
-package edu.miu.cs.cs544.service.response;
+package edu.miu.cs.cs544.service;
 
 import java.util.List;
 

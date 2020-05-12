@@ -1,4 +1,4 @@
-package edu.miu.cs.cs544.domain.appointment;
+package edu.miu.cs.cs544.domain;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -15,9 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import edu.miu.cs.cs544.domain.reservation.Reservation;
-import edu.miu.cs.cs544.domain.user.User;
 
 @Entity
 public class Appointment {
