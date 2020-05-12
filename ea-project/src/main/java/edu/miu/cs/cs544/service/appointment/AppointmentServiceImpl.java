@@ -1,5 +1,6 @@
 package edu.miu.cs.cs544.service.appointment;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 		return appointmentRepository.findById(id).orElse(null);
 	}
 
+<<<<<<< HEAD
 	@Override
 	public void updateAppointment(Integer id) {
 		Appointment appt = appointmentRepository.findById(id).orElse(null);
@@ -38,4 +40,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 		}
 	}
 	
+=======
+
+
+>>>>>>> 617526f3c1e236cc93ba514de262fb4f175294a4
 }

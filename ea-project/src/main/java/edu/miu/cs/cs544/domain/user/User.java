@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -23,12 +24,21 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@NotEmpty
 	private String firstname;
+	@NotEmpty
 	private String lastname;
+<<<<<<< HEAD
 //	@Email
+=======
+	@Email
+	@NotEmpty
+>>>>>>> 617526f3c1e236cc93ba514de262fb4f175294a4
 	private String email;
 	private String gender;
+	@NotEmpty
 	private String username;
+	@NotEmpty
 	private String password;
 	
 	@OneToOne(cascade=CascadeType.ALL)

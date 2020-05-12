@@ -22,6 +22,7 @@ import edu.miu.cs.cs544.service.user.UserService;
 public class AppointmentController {
 	@Autowired
 	private AppointmentService appointmentService;
+<<<<<<< HEAD
 	@Autowired UserService userService;
 	
 	@PostMapping(value="createappt/{id}")
@@ -33,6 +34,11 @@ public class AppointmentController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+=======
+
+	public void createAppoinment(Appointment appointment) {
+		appointmentService.createAppointment(appointment);
+>>>>>>> 617526f3c1e236cc93ba514de262fb4f175294a4
 	}
 	
 	@GetMapping(value="all", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,4 +50,6 @@ public class AppointmentController {
 			
 		}
 	}
+
+
 }

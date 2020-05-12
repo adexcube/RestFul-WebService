@@ -4,7 +4,11 @@ spring:
   application:
     name: ea-project
   datasource:
+<<<<<<< HEAD
     url: jdbc:mysql://localhost/cs544?verifyServerCertificate=false&useSSL=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=America/Chicago
+=======
+    url: jdbc:mysql://localhost:3306/cs544
+>>>>>>> 617526f3c1e236cc93ba514de262fb4f175294a4
     username: ea
     password: ea123
     driverClassName: com.mysql.cj.jdbc.Driver
