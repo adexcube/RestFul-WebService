@@ -33,6 +33,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 	public Appointment getAppointmentById(int id) {
 		return appointmentRepository.findById(id).orElse(null);
 	}
+//
+
 
 	@Override
 	public void updateAppointment(Integer id) {
