@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import edu.miu.cs.cs544.domain.appointment.Appointment;
@@ -22,9 +23,11 @@ public class Reservation {
 	private LocalDate dateAndTime;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="consumer_id")
 	private User consumer;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="appointment_id")
 	private Appointment appointment;
 	
 	public Reservation() {

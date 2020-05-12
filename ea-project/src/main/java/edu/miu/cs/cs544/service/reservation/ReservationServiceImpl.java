@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import edu.miu.cs.cs544.domain.reservation.Reservation;
 import edu.miu.cs.cs544.repository.reservation.ReservationRepository;
 
-
 @Service
 public class ReservationServiceImpl implements ReservationService {
 

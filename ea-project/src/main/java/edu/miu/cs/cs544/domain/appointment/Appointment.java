@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -30,6 +31,7 @@ public class Appointment {
 	private String location;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="provider_id")
 	private User provider;
 	
 	@OneToMany(mappedBy="appointment")
@@ -77,7 +79,7 @@ public class Appointment {
 
 	public void setTime(String time) {
 		try {
-			this.date = tf.parse(time);
+			this.time = tf.parse(time);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
