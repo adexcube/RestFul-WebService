@@ -4,9 +4,9 @@ spring:
   application:
     name: ea-project
   datasource:
-    url: jdbc:mysql://localhost/cs544?verifyServerCertificate=false&useSSL=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
-    password: root2019
+    url: jdbc:mysql://localhost/cs544?verifyServerCertificate=false&useSSL=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=America/Chicago
+    username: ea
+    password: ea123
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true

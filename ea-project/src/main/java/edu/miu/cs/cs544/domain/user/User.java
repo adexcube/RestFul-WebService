@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
@@ -24,7 +25,7 @@ public class User {
 	private int id;
 	private String firstname;
 	private String lastname;
-	@Email
+//	@Email
 	private String email;
 	private String gender;
 	private String username;
@@ -35,11 +36,11 @@ public class User {
 	@JsonBackReference
 	private UserRole role;
 	
-	@OneToMany
+	@OneToMany(mappedBy="provider")
 	@JsonBackReference
 	private List<Appointment> appointments;
 	
-	@OneToMany
+	@OneToMany(mappedBy="consumer")
 	@JsonBackReference
 	private List<Reservation> reservations;
 	
