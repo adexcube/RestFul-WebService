@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.miu.cs.cs544.domain.appt_reservation.Appointment;
-import edu.miu.cs.cs544.repository.appt_reservation.AppointmentRepository;
+import edu.miu.cs.cs544.domain.appointment.Appointment;
+import edu.miu.cs.cs544.repository.appointment.AppointmentRepository;
+import edu.miu.cs.cs544.service.appointment.AppointmentService;
+
+
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {

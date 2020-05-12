@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.miu.cs.cs544.domain.appt_reservation.Reservation;
-import edu.miu.cs.cs544.repository.appt_reservation.ReservationRepository;
+import edu.miu.cs.cs544.domain.reservation.Reservation;
+import edu.miu.cs.cs544.repository.reservation.ReservationRepository;
+import edu.miu.cs.cs544.service.reservation.ReservationService;
+
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
