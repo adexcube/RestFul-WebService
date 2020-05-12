@@ -37,8 +37,4 @@ public class ReservationController {
         return "redirect:getAppoints/";
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3cfd9d0171dcab51ac0cc722c32bf6b9603fd40f
 }
