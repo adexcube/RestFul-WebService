@@ -40,12 +40,9 @@ public class ReservationController {
         return "redirect:getAppoints/";
     }
 
-<<<<<<< HEAD
     @GetMapping("/user/{userId}")
     public List<User> getAllIndex(){
         return userService.getAllUsers();
     }
 
-=======
->>>>>>> d5d5bef56c5ca8020e19473f87fa2e7b4af5eed7
 }
