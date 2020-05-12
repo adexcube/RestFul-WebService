@@ -1,12 +1,12 @@
-package edu.miu.cs.cs544.service.user;
+package edu.miu.cs.cs544.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import edu.miu.cs.cs544.domain.user.User;
+import edu.miu.cs.cs544.domain.User;
 
-@Service
+
 public interface UserService {
 	public void createUser(User user);
 	public List<User> getAllUsers();

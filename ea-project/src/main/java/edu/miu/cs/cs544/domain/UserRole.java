@@ -1,9 +1,12 @@
-package edu.miu.cs.cs544.domain.user;
+package edu.miu.cs.cs544.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -15,8 +18,8 @@ public class UserRole {
 	private int id;
 	private String roleName;
 	
-	@OneToOne(mappedBy="role")
-	@JsonBackReference
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 	public UserRole() {

@@ -1,17 +1,17 @@
-package edu.miu.cs.cs544.service.user;
+package edu.miu.cs.cs544.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-//import org.springframework.transaction.annotation.Propagation;
-//import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import edu.miu.cs.cs544.domain.user.User;
-import edu.miu.cs.cs544.repository.user.UserRepository;
+import edu.miu.cs.cs544.domain.User;
+import edu.miu.cs.cs544.repository.UserRepository;
 
 @Service
-//@Transactional(propagation=Propagation.REQUIRES_NEW)
+@Transactional(propagation = Propagation.REQUIRES_NEW)
 public class UserServiceImpl implements UserService {
 
 	@Autowired

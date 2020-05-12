@@ -1,16 +1,19 @@
-package edu.miu.cs.cs544.service.appointment;
+package edu.miu.cs.cs544.service;
 
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import edu.miu.cs.cs544.domain.appointment.Appointment;
-import edu.miu.cs.cs544.domain.user.User;
-import edu.miu.cs.cs544.repository.appointment.AppointmentRepository;
+import edu.miu.cs.cs544.domain.Appointment;
+import edu.miu.cs.cs544.domain.User;
+import edu.miu.cs.cs544.repository.AppointmentRepository;
 
 @Service
+@Transactional(propagation = Propagation.REQUIRES_NEW)
 public class AppointmentServiceImpl implements AppointmentService {
 
 	@Autowired

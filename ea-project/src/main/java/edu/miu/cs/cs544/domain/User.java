@@ -1,4 +1,4 @@
-package edu.miu.cs.cs544.domain.user;
+package edu.miu.cs.cs544.domain;
 
 import java.util.List;
 
@@ -15,9 +15,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import edu.miu.cs.cs544.domain.appointment.Appointment;
-import edu.miu.cs.cs544.domain.reservation.Reservation;
 
 @Entity
 public class User {
@@ -37,37 +34,23 @@ public class User {
 	@NotEmpty
 	private String password;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="role_id")
-	@JsonBackReference
-	private UserRole role;
+//	@OneToMany(cascade=CascadeType.ALL)
+//	@JoinColumn(name="role_id")
+//	private UserRole role;
 	
-	@OneToMany(mappedBy="provider")
-	@JsonBackReference
-	private List<Appointment> appointments;
+//	@OneToMany(mappedBy="provider")
+//	@JsonBackReference
+//	private List<Appointment> appointments;
 	
-	@OneToMany(mappedBy="consumer")
-	@JsonBackReference
-	private List<Reservation> reservations;
+//	@OneToMany(mappedBy="consumer")
+//	@JsonBackReference
+//	private List<Reservation> reservations;
 	
 	public User() {
 		super();
 	}
 
-	public User(String firstname, String lastname, @Email String email, String gender, String username, String password,
-			UserRole role) {
-		super();
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.email = email;
-		this.gender = gender;
-		this.username = username;
-		this.password = password;
-		this.role = role;
-	}
-
-	public User(String firstname, String lastname, @Email String email, String gender, String username,
-			String password) {
+	public User(String firstname, String lastname, @Email String email, String gender, String username, String password) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -77,14 +60,14 @@ public class User {
 		this.password = password;
 	}
 	
-	public void addAppointment(Appointment appointment) {
-		appointments.add(appointment);
-	}
-	
-	public void addReservation(Reservation reservation) {
-		reservations.add(reservation);
-	}
-
+//	public void addAppointment(Appointment appointment) {
+//		appointments.add(appointment);
+//	}
+//	
+//	public void addReservation(Reservation reservation) {
+//		reservations.add(reservation);
+//	}
+//
 	public int getId() {
 		return id;
 	}
@@ -141,28 +124,20 @@ public class User {
 		this.password = password;
 	}
 
-	public UserRole getRole() {
-		return role;
-	}
-
-	public void setRole(UserRole role) {
-		this.role = role;
-	}
-
-	public List<Appointment> getAppointments() {
-		return appointments;
-	}
-
-	public void setAppointments(List<Appointment> appointments) {
-		this.appointments = appointments;
-	}
-
-	public List<Reservation> getReservations() {
-		return reservations;
-	}
-
-	public void setReservations(List<Reservation> reservations) {
-		this.reservations = reservations;
-	}
+//	public List<Appointment> getAppointments() {
+//		return appointments;
+//	}
+//
+//	public void setAppointments(List<Appointment> appointments) {
+//		this.appointments = appointments;
+//	}
+//
+//	public List<Reservation> getReservations() {
+//		return reservations;
+//	}
+//
+//	public void setReservations(List<Reservation> reservations) {
+//		this.reservations = reservations;
+//	}
 	
 }
