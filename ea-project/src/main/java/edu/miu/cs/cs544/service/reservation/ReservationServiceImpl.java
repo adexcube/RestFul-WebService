@@ -12,6 +12,7 @@ import edu.miu.cs.cs544.repository.reservation.ReservationRepository;
 @Service
 public class ReservationServiceImpl implements ReservationService {
 
+<<<<<<< HEAD
 	@Autowired
 	private ReservationRepository reservationRepository;
 	
@@ -30,4 +31,20 @@ public class ReservationServiceImpl implements ReservationService {
 		return reservationRepository.findById(id).orElse(null);
 	}
 
+=======
+    @Override
+    public void createReservation(Reservation reservation) {
+    }
+
+    @Override
+    public List<Reservation> getAllReservations() {
+        return null;
+    }
+
+    @Override
+    public Reservation getReservationById(int id) {
+        return null;
+    }
+
+>>>>>>> f45fd4918833496944d5b3beb602930993c734d2
 }
