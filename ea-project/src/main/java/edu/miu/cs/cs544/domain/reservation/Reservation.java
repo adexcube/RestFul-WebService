@@ -31,11 +31,6 @@ public class Reservation {
 		super();
 	}
 
-	public Reservation(LocalDate localDate, User consumer){
-		super();
-		this.dateAndTime = dateAndTime;
-		this.consumer = consumer;
-	}
 
 	public Reservation(Status status, LocalDate dateAndTime, User consumer) {
 		super();
