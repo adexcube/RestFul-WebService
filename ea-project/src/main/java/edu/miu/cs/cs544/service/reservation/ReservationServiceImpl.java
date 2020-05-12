@@ -1,34 +1,33 @@
 package edu.miu.cs.cs544.service.reservation;
 
-import edu.miu.cs.cs544.domain.reservation.Reservation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import edu.miu.cs.cs544.domain.reservation.Reservation;
+import edu.miu.cs.cs544.repository.reservation.ReservationRepository;
+
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
 
-    @Autowired
-    private RestTemplate restTemplate;
+	@Autowired
+	private ReservationRepository reservationRepository;
+	
+	@Override
+	public void createReservation(Reservation reservation) {
+		reservationRepository.save(reservation);
+	}
 
-    @Value("${hostname}")
-    public String url;
+	@Override
+	public List<Reservation> getAllReservations() {
+		return reservationRepository.findAll();
+	}
 
-    @Override
-    public void createReservation(Reservation reservation) {
-//        restTemplate
-    }
+	@Override
+	public Reservation getReservationById(int id) {
+		return reservationRepository.findById(id).orElse(null);
+	}
 
-    @Override
-    public List<Reservation> getAllReservations() {
-        return restTemplate.getForObject(url + "", List.class);
-    }
-
-    @Override
-    public Reservation getReservationById(int id) {
-        return null;
-    }
 }

@@ -1,4 +1,4 @@
-package edu.miu.cs.cs544.controller.appt_reservation;
+package edu.miu.cs.cs544.controller.appointment;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.miu.cs.cs544.domain.appt_reservation.Appointment;
-import edu.miu.cs.cs544.service.appt_reservation.AppointmentService;
+import edu.miu.cs.cs544.domain.appointment.Appointment;
+import edu.miu.cs.cs544.service.appointment.AppointmentService;
 
 @RestController
 @RequestMapping("/appointments")
