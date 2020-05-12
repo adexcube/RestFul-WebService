@@ -18,9 +18,9 @@ public class UserRole {
 	private int id;
 	private String roleName;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
-	private User user;
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "user_id")
+//	private User user;
 	
 	public UserRole() {
 		super();
@@ -47,13 +47,5 @@ public class UserRole {
 		this.roleName = roleName;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
 	
 }

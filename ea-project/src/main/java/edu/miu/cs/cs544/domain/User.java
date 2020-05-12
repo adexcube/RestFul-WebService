@@ -2,15 +2,7 @@ package edu.miu.cs.cs544.domain;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -36,7 +28,9 @@ public class User {
 	
 //	@OneToMany(cascade=CascadeType.ALL)
 //	@JoinColumn(name="role_id")
-//	private UserRole role;
+	@ManyToOne
+	@JoinColumn
+	private UserRole roles;
 	
 //	@OneToMany(mappedBy="provider")
 //	@JsonBackReference
