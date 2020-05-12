@@ -26,6 +26,7 @@ public class AppointmentController {
 	@Autowired
 	UserService userService;
 
+	//create appointment controller method
 	@PostMapping(value = "createappt/{id}")
 	public void createAppoinment(@PathVariable int id, @RequestBody Appointment appointment) {
 		try {
