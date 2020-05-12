@@ -15,7 +15,7 @@ import edu.miu.cs.cs544.service.appointment.AppointmentService;
 public class AppointmentController {
 	@Autowired
 	private AppointmentService appointmentService;
-	
+
 	public void createAppoinment(Appointment appointment) {
 		appointmentService.createAppointment(appointment);
 	}

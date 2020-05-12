@@ -30,4 +30,9 @@ public class ReservationServiceImpl implements ReservationService {
 		return reservationRepository.findById(id).orElse(null);
 	}
 
+	@Override
+	public void approveReservation(Reservation reservation) {
+		reservationRepository.save(reservation);
+	}
+
 }

@@ -9,14 +9,13 @@ import edu.miu.cs.cs544.service.appointment.AppointmentService;
 import edu.miu.cs.cs544.service.reservation.ReservationService;
 import edu.miu.cs.cs544.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @RestController
+@RequestMapping("/reservation")
 public class ReservationController {
     @Autowired
     private ReservationService reservationService;
@@ -37,12 +36,14 @@ public class ReservationController {
         User user = userService.getUserById(userId);
         Reservation reservation = new Reservation(Status.PENDING, LocalDate.now(), user);
         reservationService.createReservation(reservation);
-        return "redirect:getAppoints/";
+        return "redirect:/";
     }
 
-    @GetMapping("/user/{userId}")
-    public List<User> getAllIndex(){
-        return userService.getAllUsers();
+    @PostMapping("/user/{userId}/reserve/{appointId}")
+    public void approveReservation(@PathVariable int userId, @PathVariable int appointId) {
+        User user = userService.getUserById(userId);
+        Reservation reservation = new Reservation(Status.ACCEPTED, LocalDate.now(), user);
+        reservationService.approveReservation(reservation);
     }
 
 }

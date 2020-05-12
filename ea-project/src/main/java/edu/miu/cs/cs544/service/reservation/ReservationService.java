@@ -12,4 +12,5 @@ public interface ReservationService {
 	public void createReservation(Reservation reservation);
 	public List<Reservation> getAllReservations();
 	public Reservation getReservationById(int id);
+	public void approveReservation(Reservation reservation);
 }
