@@ -26,6 +26,7 @@ public class AppointmentController {
 	UserService userService;
 
 	@ResponseBody
+	//create appointment controller method
 	@PostMapping(value = "createappt/{id}")
 	public void createAppoinment(@PathVariable int id, @RequestParam("id") int appointmentid, @RequestParam("date") String date, @RequestParam("location") String location, @RequestParam("time") String time, @RequestParam("provider_id") int provider_id) {
 		try {
