@@ -28,7 +28,7 @@ public class ReservationController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/getAppoints/")
+    @GetMapping("/")
     public Response getAllAppointments() {
         try {
             return new Response(200, "Success", appointmentService.getAllAppointments());

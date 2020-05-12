@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Util {
@@ -17,12 +18,18 @@ public class Util {
         List<Appointment> appointments = new ArrayList<>();
         LocalDate date = LocalDate.now();
 
-        if(date.getDayOfMonth() == 30 || date.getDayOfMonth() == 31) {
-            if(date.getMonthValue() + 1 < 13) {
-//                Appointment appointment = new Appointment()
-//                date.getMonthValue() + 1
+
+//        if(date.getDayOfMonth() == 30 || date.getDayOfMonth() == 31) {
+        if(date.getMonthValue() + 1 < 13) {
+            for(int i = 1 ; i <= 200; i ++) {
+                int nextMonth = date.getMonthValue() + 1;
+//                    String d = nextMonth + "/" + ;
+//                Appointment appointment = new Appointment(, );
+//                    date.getMonthValue() + 1
+
             }
         }
+//        }
         return null;
     }
 

@@ -28,10 +28,10 @@ public class AppointmentController {
 	@ResponseBody
 	//create appointment controller method
 	@PostMapping(value = "createappt/{id}")
-	public void createAppoinment(@PathVariable int id, @RequestParam("id") int appointmentid, @RequestParam("date") String date, @RequestParam("location") String location, @RequestParam("time") String time, @RequestParam("provider_id") int provider_id) {
+	public void createAppoinment(@PathVariable int id, @RequestParam("date") String date, @RequestParam("location") String location, @RequestParam("time") String time) {
 		try {
 			Appointment appointment = new Appointment(date, time, location);
-			User user = userService.getUserById(provider_id);
+			User user = userService.getUserById(id);
 			if(user != null) {
 				appointment.setProvider(user);
 				appointmentService.createAppointment(appointment);
