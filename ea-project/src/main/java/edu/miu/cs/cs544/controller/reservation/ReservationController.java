@@ -41,7 +41,7 @@ public class ReservationController {
     }
 
     @GetMapping("/user/{userId}")
-    public List<User> getAppointments(){
+    public List<User> getAllIndex(){
         return userService.getAllUsers();
     }
 
