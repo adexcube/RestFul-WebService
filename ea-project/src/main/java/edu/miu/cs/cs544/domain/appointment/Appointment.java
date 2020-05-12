@@ -2,6 +2,7 @@ package edu.miu.cs.cs544.domain.appointment;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import edu.miu.cs.cs544.domain.reservation.Reservation;
 import edu.miu.cs.cs544.domain.user.User;
 
 @Entity
@@ -30,8 +32,8 @@ public class Appointment {
 	@ManyToOne(cascade=CascadeType.ALL)
 	private User provider;
 	
-//	@OneToMany(mappedBy="appointment")
-//	private Reservation reservations;
+	@OneToMany(mappedBy="appointment")
+	private List<Reservation> reservations;
 	
 	private static DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
 			Locale.US);
