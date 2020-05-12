@@ -1,5 +1,6 @@
 package edu.miu.cs.cs544.service.appointment;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	public Appointment getAppointmentById(int id) {
 		return appointmentRepository.findById(id).orElse(null);
 	}
-	
+
+
+
 }

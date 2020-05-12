@@ -24,4 +24,6 @@ public class AppointmentController {
 	public List<Appointment> getAllAppointments() {
 		return appointmentService.getAllAppointments();
 	}
+
+
 }
