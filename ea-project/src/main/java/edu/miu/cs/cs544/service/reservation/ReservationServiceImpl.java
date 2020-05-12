@@ -14,21 +14,20 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Autowired
 	private ReservationRepository reservationRepository;
+	
+	@Override
+	public void createReservation(Reservation reservation) {
+		reservationRepository.save(reservation);
+	}
 
+	@Override
+	public List<Reservation> getAllReservations() {
+		return reservationRepository.findAll();
+	}
 
-    @Override
-    public void createReservation(Reservation reservation) {
-    }
-
-    @Override
-    public List<Reservation> getAllReservations() {
-        return null;
-    }
-
-    @Override
-    public Reservation getReservationById(int id) {
-        return null;
-    }
-
+	@Override
+	public Reservation getReservationById(int id) {
+		return reservationRepository.findById(id).orElse(null);
+	}
 
 }
