@@ -5,29 +5,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class UserRole {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+
+	@NotNull
 	private String roleName;
-	
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "user_id")
-//	private User user;
-	
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public UserRole() {
-		super();
+
 	}
 
 	public UserRole(String roleName) {
-		super();
 		this.roleName = roleName;
 	}
 
@@ -47,5 +52,4 @@ public class UserRole {
 		this.roleName = roleName;
 	}
 
-	
 }

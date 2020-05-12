@@ -6,12 +6,10 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 public class User {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@NotEmpty
 	private String firstname;
@@ -25,27 +23,25 @@ public class User {
 	private String username;
 	@NotEmpty
 	private String password;
-	
-//	@OneToMany(cascade=CascadeType.ALL)
-//	@JoinColumn(name="role_id")
-	@ManyToOne
-	@JoinColumn
-	private UserRole roles;
-	
-//	@OneToMany(mappedBy="provider")
-//	@JsonBackReference
-//	private List<Appointment> appointments;
-	
-//	@OneToMany(mappedBy="consumer")
-//	@JsonBackReference
-//	private List<Reservation> reservations;
-	
-	public User() {
-		super();
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<UserRole> roles;
+
+	public List<UserRole> getRoles() {
+		return roles;
 	}
 
-	public User(String firstname, String lastname, @Email String email, String gender, String username, String password) {
-		super();
+	public void setRoles(List<UserRole> roles) {
+		this.roles = roles;
+	}
+
+	public User() {
+
+	}
+
+	public User(String firstname, String lastname, @Email String email, String gender, String username,
+			String password) {
+
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
@@ -53,15 +49,7 @@ public class User {
 		this.username = username;
 		this.password = password;
 	}
-	
-//	public void addAppointment(Appointment appointment) {
-//		appointments.add(appointment);
-//	}
-//	
-//	public void addReservation(Reservation reservation) {
-//		reservations.add(reservation);
-//	}
-//
+
 	public int getId() {
 		return id;
 	}
@@ -118,20 +106,8 @@ public class User {
 		this.password = password;
 	}
 
-//	public List<Appointment> getAppointments() {
-//		return appointments;
-//	}
-//
-//	public void setAppointments(List<Appointment> appointments) {
-//		this.appointments = appointments;
-//	}
-//
-//	public List<Reservation> getReservations() {
-//		return reservations;
-//	}
-//
-//	public void setReservations(List<Reservation> reservations) {
-//		this.reservations = reservations;
-//	}
-	
+	public void addRole(UserRole role) {
+		role.setUser(this);
+		this.roles.add(role);
+	}
 }
