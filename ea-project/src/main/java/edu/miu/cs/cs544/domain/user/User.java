@@ -2,14 +2,17 @@ package edu.miu.cs.cs544.domain.user;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import edu.miu.cs.cs544.domain.appointment.Appointment;
 import edu.miu.cs.cs544.domain.reservation.Reservation;
@@ -17,7 +20,7 @@ import edu.miu.cs.cs544.domain.reservation.Reservation;
 @Entity
 public class User {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String firstname;
 	private String lastname;
@@ -27,14 +30,17 @@ public class User {
 	private String username;
 	private String password;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="role_id")
+	@JsonBackReference
 	private UserRole role;
 	
 	@OneToMany
+	@JsonBackReference
 	private List<Appointment> appointments;
 	
 	@OneToMany
+	@JsonBackReference
 	private List<Reservation> reservations;
 	
 	public User() {
