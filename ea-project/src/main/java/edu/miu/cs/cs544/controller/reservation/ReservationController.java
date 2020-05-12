@@ -1,4 +1,4 @@
-package edu.miu.cs.cs544.controller.user;
+package edu.miu.cs.cs544.controller.reservation;
 
 import edu.miu.cs.cs544.domain.reservation.Reservation;
 import edu.miu.cs.cs544.domain.user.User;

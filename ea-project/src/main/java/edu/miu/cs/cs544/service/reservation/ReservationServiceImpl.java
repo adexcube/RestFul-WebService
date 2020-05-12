@@ -11,24 +11,18 @@ import java.util.List;
 @Service
 public class ReservationServiceImpl implements ReservationService {
 
-    @Autowired
-    private RestTemplate restTemplate;
-
-    @Value("${hostname}")
-    public String url;
-
     @Override
     public void createReservation(Reservation reservation) {
-//        restTemplate
     }
 
     @Override
     public List<Reservation> getAllReservations() {
-        return restTemplate.getForObject(url + "", List.class);
+        return null;
     }
 
     @Override
     public Reservation getReservationById(int id) {
         return null;
     }
+
 }
