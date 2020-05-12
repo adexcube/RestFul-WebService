@@ -1,4 +1,4 @@
-package edu.miu.cs.cs544.domain.appt_reservation;
+package edu.miu.cs.cs544.domain.appointment;
 
 import java.text.DateFormat;
 import java.util.Date;

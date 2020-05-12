@@ -1,53 +1,34 @@
-package edu.miu.cs.cs544.domain.user;
+package edu.miu.cs.cs544.service.response;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import edu.miu.cs.cs544.domain.appointment.Appointment;
 import edu.miu.cs.cs544.domain.reservation.Reservation;
+import edu.miu.cs.cs544.domain.user.UserRole;
 
-@Entity
-public class User {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+public class UserResponse {
 	private int id;
 	private String firstname;
 	private String lastname;
-	@Email
 	private String email;
 	private String gender;
 	private String username;
 	private String password;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="role_id")
-	@JsonBackReference
 	private UserRole role;
 	
-	@OneToMany
-	@JsonBackReference
 	private List<Appointment> appointments;
 	
-	@OneToMany
-	@JsonBackReference
 	private List<Reservation> reservations;
 	
-	public User() {
+	public UserResponse() {
 		super();
 	}
 
-	public User(String firstname, String lastname, @Email String email, String gender, String username, String password,
+	public UserResponse(String firstname, String lastname, @Email String email, String gender, String username, String password,
 			UserRole role) {
 		super();
 		this.firstname = firstname;
@@ -59,7 +40,7 @@ public class User {
 		this.role = role;
 	}
 
-	public User(String firstname, String lastname, @Email String email, String gender, String username,
+	public UserResponse(String firstname, String lastname, @Email String email, String gender, String username,
 			String password) {
 		super();
 		this.firstname = firstname;
