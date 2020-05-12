@@ -1,4 +1,4 @@
-package edu.miu.cs.cs544.Logger;
+package edu.miu.cs.cs544.logger;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;

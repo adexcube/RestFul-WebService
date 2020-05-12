@@ -31,7 +31,7 @@ public class ReservationController {
         return appointmentService.getAllAppointments();
     }
 
-    @GetMapping("/user/{userId}/reserve/{appointId}")
+    @GetMapping("/{userId}/reserve/{appointId}")
     public String reserveAppointment(@PathVariable int userId, @PathVariable int appointId) {
         User user = userService.getUserById(userId);
         Reservation reservation = new Reservation(Status.PENDING, LocalDate.now(), user);
@@ -39,7 +39,7 @@ public class ReservationController {
         return "redirect:/";
     }
 
-    @PostMapping("/user/{userId}/reserve/{appointId}")
+    @PostMapping("/{userId}/reserve/{appointId}")
     public void approveReservation(@PathVariable int userId, @PathVariable int appointId) {
         User user = userService.getUserById(userId);
         Reservation reservation = new Reservation(Status.ACCEPTED, LocalDate.now(), user);
