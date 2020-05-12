@@ -14,6 +14,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Autowired
 	private ReservationRepository reservationRepository;
+<<<<<<< HEAD
 	
 	@Override
 	public void createReservation(Reservation reservation) {
@@ -29,5 +30,23 @@ public class ReservationServiceImpl implements ReservationService {
 	public Reservation getReservationById(int id) {
 		return reservationRepository.findById(id).orElse(null);
 	}
+=======
+
+
+    @Override
+    public void createReservation(Reservation reservation) {
+    }
+
+    @Override
+    public List<Reservation> getAllReservations() {
+        return null;
+    }
+
+    @Override
+    public Reservation getReservationById(int id) {
+        return null;
+    }
+
+>>>>>>> 3cfd9d0171dcab51ac0cc722c32bf6b9603fd40f
 
 }

@@ -10,12 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-
 @RestController
 public class ReservationController {
 
@@ -42,4 +37,8 @@ public class ReservationController {
         return "redirect:getAppoints/";
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3cfd9d0171dcab51ac0cc722c32bf6b9603fd40f
 }
