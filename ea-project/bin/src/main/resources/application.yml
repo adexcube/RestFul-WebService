@@ -18,19 +18,3 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
-        
-    mail:
-        host: smtp.gmail.com
-        password: test@test
-        port: 587
-        properties:
-            mail:
-                smtp:
-                    auth: true
-                    connectiontimeout: 5000
-                    timeout: 5000
-                    writetimeout: 5000
-        username: birg20@gmail.com
-
-        
- 
