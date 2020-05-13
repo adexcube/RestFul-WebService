@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/reservation")
+@RequestMapping("{userId}/reservation")
 public class ReservationController {
     @Autowired
     private ReservationService reservationService;
@@ -28,7 +28,7 @@ public class ReservationController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/getAppoints/")
+    @GetMapping("/")
     public Response getAllAppointments() {
         try {
             return new Response(200, "Success", appointmentService.getAllAppointments());
@@ -37,11 +37,12 @@ public class ReservationController {
         }
     }
 
-    @GetMapping("/{userId}/reserve/{appointId}")
+    @GetMapping("/{appointId}")
     public Response reserveAppointment(@PathVariable int userId, @PathVariable int appointId) {
         try {
             User user = userService.getUserById(userId);
-            Reservation reservation = new Reservation(Status.PENDING, LocalDate.now(), user);
+            Appointment appointment = appointmentService.getAppointmentById(appointId);
+            Reservation reservation = new Reservation(Status.PENDING, LocalDate.now().toString(), user, appointment);
             reservationService.createReservation(reservation);
             return new Response(200, "Success", null);
         } catch (Exception ex) {
@@ -49,11 +50,12 @@ public class ReservationController {
         }
     }
 
-    @PostMapping("/{userId}/reserve/{appointId}")
+    @PostMapping("/{appointId}")
     public Response approveReservation(@PathVariable int userId, @PathVariable int appointId) {
         try {
             User user = userService.getUserById(userId);
-            Reservation reservation = new Reservation(Status.ACCEPTED, LocalDate.now(), user);
+            Appointment appointment = appointmentService.getAppointmentById(appointId);
+            Reservation reservation = new Reservation(Status.ACCEPTED, LocalDate.now().toString(), user, appointment);
             reservationService.approveReservation(reservation);
             return new Response(200, "Success", null);
         } catch (Exception ex) {

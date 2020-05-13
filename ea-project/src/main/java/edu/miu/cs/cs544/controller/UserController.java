@@ -3,16 +3,16 @@ package edu.miu.cs.cs544.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.miu.cs.cs544.domain.User;
@@ -26,71 +26,67 @@ public class UserController {
 	private UserService userService;
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public Response createUser(@RequestBody User user) {
+	public ResponseEntity createUser(@RequestBody User user) {
 		try {
 			String result = userService.createUser(user);
-			return new Response(200, result);
+			return ResponseEntity.status(HttpStatus.OK).body(result);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return new Response(400, e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}
 
 	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Response updateUser(@PathVariable int id, @RequestBody User user) {
+	public ResponseEntity updateUser(@PathVariable int id, @RequestBody User user) {
 		try {
 			String result = userService.updateUser(id, user);
-			return new Response(200, result);
+			return ResponseEntity.status(HttpStatus.OK).body(result);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return new Response(400, e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public Response deleteUser(@PathVariable int id) {
+	public ResponseEntity deleteUser(@PathVariable int id) {
 		try {
 			String result = userService.deleteUser(id);
-			return new Response(200, result);
+			return ResponseEntity.status(HttpStatus.OK).body(result);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return new Response(400, e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}
 
 	@GetMapping
-	public Response getAllUsers() {
+	public ResponseEntity getAllUsers() {
 		try {
 			List<User> result = userService.getAllUsers();
-			return new Response(200, "successful", result);
+			return ResponseEntity.status(HttpStatus.OK).body(result);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return new Response(400, e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 
 	}
 
 	@GetMapping(value = "/{id}")
-	public Response getUserById(@PathVariable int id) {
+	public ResponseEntity getUserById(@PathVariable int id) {
 		try {
 			User user = userService.getUserById(id);
-			return new Response(200, "successful", user);
+			return ResponseEntity.status(HttpStatus.OK).body(user);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return new Response(400, e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public Response login(@ModelAttribute("user") User user) {
+	@GetMapping(value = "/login")
+	public ResponseEntity login(@RequestBody User user) {
 		try {
 			String result = userService.login(user.getUsername(), user.getPassword());
-			return new Response(200, result);
+			return ResponseEntity.status(HttpStatus.OK).body(result);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new Response(400, e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-
 	}
 }

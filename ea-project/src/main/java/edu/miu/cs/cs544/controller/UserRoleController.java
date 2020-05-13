@@ -3,6 +3,8 @@ package edu.miu.cs.cs544.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,33 +19,27 @@ public class UserRoleController {
 	@Autowired
 	private UserRoleService userRoleService;
 
-	@GetMapping(value = "all")
-	public List<UserRole> getAllUserRoles() {
+	@GetMapping
+	public ResponseEntity getAllUserRoles() {
 		try {
-			return userRoleService.getAllUserRoles();
+			List<UserRole> roles = userRoleService.getAllUserRoles();
+			return ResponseEntity.status(HttpStatus.OK).body(roles);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return null;
+
 	}
 
 	@GetMapping(value = "/{id}")
-	public UserRole getUserRoleById(@PathVariable int id) {
+	public ResponseEntity getUserRoleById(@PathVariable int id) {
 		try {
-			return userRoleService.getUserRoleById(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+			UserRole role = userRoleService.getUserRoleById(id);
 
-	@GetMapping(value = "user/{userid}")
-	public List<UserRole> getUserRolesByUserId(@PathVariable int userid) {
-		try {
-			return userRoleService.getUserRolesByUserId(userid);
+			return ResponseEntity.status(HttpStatus.OK).body(role);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return null;
 	}
 }

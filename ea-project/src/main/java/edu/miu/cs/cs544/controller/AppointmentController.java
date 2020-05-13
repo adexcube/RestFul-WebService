@@ -4,20 +4,20 @@ package edu.miu.cs.cs544.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
 import edu.miu.cs.cs544.domain.Appointment;
 import edu.miu.cs.cs544.domain.User;
 import edu.miu.cs.cs544.service.AppointmentService;
-import edu.miu.cs.cs544.service.Response;
 import edu.miu.cs.cs544.service.UserService;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.List;
+import java.text.ParseException;
 
 @RestController
-@RequestMapping("/appointment")
+@RequestMapping("/appointments")
 public class AppointmentController {
 	@Autowired
 	private AppointmentService appointmentService;
@@ -27,30 +27,41 @@ public class AppointmentController {
 
 	@ResponseBody
 	//create appointment controller method
-	@PostMapping(value = "createappt/{id}")
-	public void createAppoinment(@PathVariable int id, @RequestParam("id") int appointmentid, @RequestParam("date") String date, @RequestParam("location") String location, @RequestParam("time") String time, @RequestParam("provider_id") int provider_id) {
+	@PostMapping(value = "new/{id}")
+	public ResponseEntity<Appointment> createAppoinment(@PathVariable int id, @RequestParam("date") String date, 
+							@RequestParam("location") String location, @RequestParam("time") String time) {
 		try {
-			Appointment appointment = new Appointment(date, time, location);
-			User user = userService.getUserById(provider_id);
+			User user = userService.getUserById(id);
+			  Appointment appointment = new Appointment(date, time, location);
 			if(user != null) {
 				appointment.setProvider(user);
 				appointmentService.createAppointment(appointment);
+				return ResponseEntity.ok().body(appointment);
 			} else {
-				throw new Exception();
+				return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
 		}
 	}
 
 	@GetMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Response getAllAppointments() {
-		try {
-			return new Response(200, "successful", appointmentService.getAllAppointments());
+	public ResponseEntity<List<Appointment>> getAllAppointments() throws ParseException {
+			try {
+			return ResponseEntity.ok().body(appointmentService.getAllAppointments());
 		} catch (Exception e) {
-			return new Response(400, e.getMessage(), null);
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
 
 		}
 	}
-
+	
+	@DeleteMapping
+	public ResponseEntity<Appointment> DeleteAppointment(@RequestParam int id) {
+		try {
+			appointmentService.deleteAppointment(id);
+		} catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
+		}
+		return ResponseEntity.ok().body(null);
+	}
 }

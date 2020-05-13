@@ -16,14 +16,12 @@ public class Reservation {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private Status status;
-	private LocalDate dateAndTime;
+	private String dateAndTime;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="consumer_id")
 	private User consumer;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="appointment_id")
 	private Appointment appointment;
 	
 	public Reservation() {
@@ -31,11 +29,12 @@ public class Reservation {
 	}
 
 
-	public Reservation(Status status, LocalDate dateAndTime, User consumer) {
+	public Reservation(Status status, String dateAndTime, User consumer, Appointment appointment) {
 		super();
 		this.status = status;
 		this.dateAndTime = dateAndTime;
 		this.consumer = consumer;
+		this.appointment = appointment;
 	}
 
 	public int getId() {
@@ -54,11 +53,11 @@ public class Reservation {
 		this.status = status;
 	}
 
-	public LocalDate getDateAndTime() {
+	public String getDateAndTime() {
 		return dateAndTime;
 	}
 
-	public void setDateAndTime(LocalDate dateAndTime) {
+	public void setDateAndTime(String dateAndTime) {
 		this.dateAndTime = dateAndTime;
 	}
 
