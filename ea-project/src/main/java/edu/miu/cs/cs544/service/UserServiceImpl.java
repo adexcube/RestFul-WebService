@@ -3,6 +3,7 @@ package edu.miu.cs.cs544.service;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String createUser(User user) {
 		if (!usernameExists(user.getUsername())) {
-
-			for (UserRole role : user.getRoles()) {
-				role.setUser(user);
-			}
 			userRepository.save(user);
 
 			return "User created Successfully";
@@ -72,5 +69,6 @@ public class UserServiceImpl implements UserService {
 
 		return exists ? "User logged in Successfully" : "Invalid Credentails";
 	}
+
 
 }

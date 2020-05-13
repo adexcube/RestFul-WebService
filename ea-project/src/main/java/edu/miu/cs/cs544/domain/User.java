@@ -24,7 +24,8 @@ public class User {
 	@NotEmpty
 	private String password;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name ="userId")
 	private List<UserRole> roles;
 
 	public List<UserRole> getRoles() {
@@ -108,7 +109,6 @@ public class User {
 	}
 
 	public void addRole(UserRole role) {
-		role.setUser(this);
 		this.roles.add(role);
 	}
 }
