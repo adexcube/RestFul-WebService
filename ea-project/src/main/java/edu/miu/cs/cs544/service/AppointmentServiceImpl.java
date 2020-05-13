@@ -42,6 +42,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 			appointmentRepository.save(appt);
 		}
 	}
+	@Override
+	public void updateAppointment(int id, Appointment appointment) {
+		appointment.setId(id);
+//		if (appt != null) {
+			appointmentRepository.save(appointment);
+//		}
+	}
 
 	@Override
 	public void deleteAppointment(int id) {

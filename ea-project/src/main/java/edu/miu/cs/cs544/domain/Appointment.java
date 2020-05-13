@@ -50,6 +50,13 @@ public class Appointment {
 		this.location = location;
 	}
 
+	public Appointment(int id, String date, String time, String location) {
+		super();
+		setDate(date);
+		setTime(time);
+		this.location = location;
+	}
+
 	public int getId() {
 		return id;
 	}

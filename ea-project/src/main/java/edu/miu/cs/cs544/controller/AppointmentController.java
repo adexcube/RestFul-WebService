@@ -33,9 +33,9 @@ public class AppointmentController {
 	public Response createAppoinment(@PathVariable int id, @RequestParam("date") String date, 
 			@RequestParam("location") String location, @RequestParam("time") String time) {
 		try {
-			Appointment appointment = new Appointment(date, time, location);
 			User user = userService.getUserById(id);
 			if(user != null) {
+				Appointment appointment = new Appointment(date, time, location);
 				appointment.setProvider(user);
 				appointmentService.createAppointment(appointment);
 			} else {
@@ -55,17 +55,6 @@ public class AppointmentController {
 			return new Response(400, e.getMessage(), null);
 
 		}
-	}
-	
-	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Response editAppointment(@PathVariable int id, @RequestParam("id") int appt_id, @RequestParam("date") String date, 
-			@RequestParam("location") String location, @RequestParam("time") String time) {
-		try {
-			appointmentService.updateAppointment(id);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 	
 	@DeleteMapping//(value = "/{id}")
