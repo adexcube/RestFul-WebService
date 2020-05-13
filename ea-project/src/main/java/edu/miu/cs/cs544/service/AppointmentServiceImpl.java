@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,15 +34,17 @@ public class AppointmentServiceImpl implements AppointmentService {
 	public Appointment getAppointmentById(int id) {
 		return appointmentRepository.findById(id).orElse(null);
 	}
-//
-
 
 	@Override
-	public void updateAppointment(Integer id) {
+	public void updateAppointment(int id) {
 		Appointment appt = appointmentRepository.findById(id).orElse(null);
 		if (appt != null) {
 			appointmentRepository.save(appt);
 		}
 	}
 
+	@Override
+	public void deleteAppointment(int id) {
+			appointmentRepository.deleteById(id);
+	}
 }

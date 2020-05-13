@@ -27,7 +27,7 @@ public class Appointment {
 	private Date time;
 	private String location;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne//(cascade=CascadeType.ALL)
 	@JoinColumn(name="provider_id")
 	private User provider;
 	
