@@ -29,8 +29,8 @@ public class UserRoleServiceImpl implements UserRoleService {
 	}
 
 	@Override
-	public List<UserRole> getUserRolesByUserId(int userid) {
-		List<UserRole> roles = userRoleRepository.findAll().stream().filter(r -> r.getUser().getId() == userid)
+	public List<String> getUserRolesByUserId(int userid) {
+		List<String> roles = userRoleRepository.findAll().stream().filter(r -> r.getUser().getId() == userid).map(r -> r.getRoleName())
 				.collect(Collectors.toList());
 
 		return roles;

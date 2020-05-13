@@ -1,6 +1,8 @@
 package edu.miu.cs.cs544.service;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.miu.cs.cs544.domain.User;
+import edu.miu.cs.cs544.domain.UserRole;
 import edu.miu.cs.cs544.repository.UserRepository;
 
 @Service
@@ -18,20 +21,31 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	@Override
-	public void createUser(User user) {
-		if (!usernameExists(user.getUsername()))
+	public String createUser(User user) {
+		if (!usernameExists(user.getUsername())) {
+
+			for (UserRole role : user.getRoles()) {
+				role.setUser(user);
+			}
 			userRepository.save(user);
+
+			return "User created Successfully";
+		}
+
+		return "Username already Exists";
 	}
 
 	@Override
-	public void updateUser(int id, User user) {
+	public String updateUser(int id, User user) {
 		user.setId(id);
 		userRepository.save(user);
+		return "User updated Successfully";
 	}
 
 	@Override
-	public void deleteUser(int id) {
+	public String deleteUser(int id) {
 		userRepository.deleteById(id);
+		return "User deleted Successfully";
 
 	}
 
@@ -49,6 +63,14 @@ public class UserServiceImpl implements UserService {
 	public Boolean usernameExists(String username) {
 		int count = (int) userRepository.findAll().stream().filter(u -> u.getUsername().equals(username)).count();
 		return count > 0;
+	}
+
+	@Override
+	public String login(String username, String password) {
+		Boolean exists = userRepository.findAll().stream()
+				.anyMatch(u -> u.getUsername().equals(username) && u.getPassword().equals(password));
+
+		return exists ? "User logged in Successfully" : "Invalid Credentails";
 	}
 
 }

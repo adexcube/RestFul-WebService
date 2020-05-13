@@ -9,5 +9,5 @@ import edu.miu.cs.cs544.domain.UserRole;
 public interface UserRoleService {
 	public List<UserRole> getAllUserRoles();
 	public UserRole getUserRoleById(int id);
-	public List<UserRole> getUserRolesByUserId(int userid);
+	public List<String> getUserRolesByUserId(int userid);
 }
