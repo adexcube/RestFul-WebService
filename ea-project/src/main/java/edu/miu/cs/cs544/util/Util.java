@@ -7,13 +7,17 @@ import edu.miu.cs.cs544.repository.ReservationRepository;
 import edu.miu.cs.cs544.service.AppointmentService;
 import edu.miu.cs.cs544.service.ReservationService;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.EntityManagerFactory;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -79,7 +83,9 @@ public class Util {
 //    }
 
     @Autowired
-    private SessionFactory sf = new Ses;
+    private JdbcTemplate jdbcTemplate;
+
+
 
     public SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
     public SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
@@ -105,9 +111,12 @@ public class Util {
         userroles.add(new UserRole("User"));
         for (String s : starts) {
             User user = new User("User-"+s, "Doe", "johndoe@gmail.com", "Male", "John", "123", userroles);
+            jdbcTemplate.update("insert into user ()")
             Appointment appointment = new Appointment(d, s, location);
             appointment.setProvider(checker);
             System.out.println(appointment.toString());
+            jdbcTemplate.update("insert into appointment (date, location, time, provider_id) values (?,?,?,?)",
+                    appointment.getDate(), appointment.getLocation(), appointment.getTime(), appointment.getProvider().getId())
             createAppointment(appointment);
             Reservation reservation = new Reservation(Status.ACCEPTED, new Date().toString(), user, appointment);
             reservationService.createReservation(reservation);
@@ -126,11 +135,6 @@ public class Util {
         }
         return t;
     }
-
-
-
-
-
 
 
 }

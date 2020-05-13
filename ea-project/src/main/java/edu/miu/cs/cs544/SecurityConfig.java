@@ -13,9 +13,9 @@
 //	      .anyRequest().authenticated()
 //	      .and().httpBasic();
 //	}
-//	
+//
 //    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) 
+//    public void configureGlobal(AuthenticationManagerBuilder auth)
 //      throws Exception {
 //        auth.inMemoryAuthentication().withUser("darhy")
 //          .password("1234").roles("ADMIN");
