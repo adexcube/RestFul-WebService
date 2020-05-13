@@ -91,6 +91,5 @@ public class UserController {
 			e.printStackTrace();
 			return new Response(400, e.getMessage());
 		}
-
 	}
 }
