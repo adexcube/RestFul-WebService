@@ -21,10 +21,10 @@ public class Appointment {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	@Temporal(TemporalType.DATE)
-	private Date date;
-	@Temporal(TemporalType.TIME)
-	private Date time;
+//	@Temporal(TemporalType.DATE)
+	private String date;
+//	@Temporal(TemporalType.TIME)
+	private String time;
 	private String location;
 	
 	@ManyToOne//(cascade=CascadeType.ALL)
@@ -34,10 +34,10 @@ public class Appointment {
 	@OneToMany(mappedBy="appointment")
 	private List<Reservation> reservations;
 	
-	private static DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
-			Locale.US);
-	private static DateFormat tf = DateFormat.getTimeInstance(DateFormat.SHORT,
-			Locale.US);
+//	private static DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
+//			Locale.US);
+//	private static DateFormat tf = DateFormat.getTimeInstance(DateFormat.SHORT,
+//			Locale.US);
 	
 	public Appointment() {
 		super();
@@ -66,27 +66,31 @@ public class Appointment {
 	}
 
 	public String getDate() {
-		return df.format(date);
+		return this.date;
+//		return df.format(date);
 	}
 
 	public void setDate(String date) {
-		try {
-			this.date = df.parse(date);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			this.date = df.parse(date);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		this.date = date;
 	}
 
 	public String getTime() {
-		return tf.format(time);
+		return this.time;
+//		return tf.format(time);
 	}
 
 	public void setTime(String time) {
-		try {
-			this.time = tf.parse(time);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		this.time = time;
+//		try {
+//			this.time = tf.parse(time);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	public String getLocation() {
@@ -104,6 +108,15 @@ public class Appointment {
 	public void setProvider(User provider) {
 		this.provider = provider;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Appointment{" +
+				"id=" + id +
+				", date=" + date +
+				", time=" + time +
+				", location='" + location + '\'' +
+				", provider=" + provider +
+				'}';
+	}
 }
