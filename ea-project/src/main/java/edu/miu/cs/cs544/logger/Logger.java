@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.Before;
 @Aspect
 public class Logger {
 
-    @Before("within (edu.miu.cs.cs544.repository.appointment)")
+    @Before("execution (* edu.miu.cs.cs544.controller.*(..))")
     public void log(JoinPoint jp) {
         System.out.println("Method: " + jp.getSignature().getName() + " Executed.");
     }

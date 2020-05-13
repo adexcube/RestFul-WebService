@@ -13,6 +13,7 @@ import edu.miu.cs.cs544.service.Response;
 import edu.miu.cs.cs544.service.UserService;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Locale;
 
@@ -44,7 +45,7 @@ public class AppointmentController {
 	}
 
 	@GetMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Response getAllAppointments() {
+	public Response getAllAppointments() throws ParseException {
 		try {
 			return new Response(200, "successful", appointmentService.getAllAppointments());
 		} catch (Exception e) {
