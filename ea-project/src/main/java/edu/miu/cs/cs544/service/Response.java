@@ -2,26 +2,38 @@ package edu.miu.cs.cs544.service;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+
 public class Response {
-	private int status_code;
+	private HttpStatus status_code;
+	private int status_cod;
 	private String message;
 	private Object data;
 
-	public Response(int status_code, String message, Object data) {
+	public Response(HttpStatus status_code, String message, Object data) {
 		this.status_code = status_code;
 		this.message = message;
 		this.data = data;
 	}
-	public Response(int status_code, String message) {
+	public Response(int status_code, String message, Object data) {
+		this.status_cod = status_code;
+		this.message = message;
+		this.data = data;
+	}
+	public Response(HttpStatus status_code, String message) {
 		this.status_code = status_code;
 		this.message = message;
 	}
+	public Response(int status_code, String message) {
+		this.status_cod = status_code;
+		this.message = message;
+	}
 
-	public int getStatus_code() {
+	public HttpStatus getStatus_code() {
 		return status_code;
 	}
 
-	public void setStatus_code(int status_code) {
+	public void setStatus_code(HttpStatus status_code) {
 		this.status_code = status_code;
 	}
 

@@ -27,7 +27,7 @@ public class Appointment {
 	private String time;
 	private String location;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne//(cascade=CascadeType.ALL)
 	@JoinColumn(name="provider_id")
 	private User provider;
 	
@@ -44,6 +44,13 @@ public class Appointment {
 	}
 
 	public Appointment(String date, String time, String location) {
+		super();
+		setDate(date);
+		setTime(time);
+		this.location = location;
+	}
+
+	public Appointment(int id, String date, String time, String location) {
 		super();
 		setDate(date);
 		setTime(time);
