@@ -21,7 +21,7 @@ import java.text.ParseException;
 public class AppointmentController {
 	@Autowired
 	private AppointmentService appointmentService;
-
+	
 	@Autowired
 	UserService userService;
 
@@ -38,25 +38,33 @@ public class AppointmentController {
 				appointmentService.createAppointment(appointment);
 				return ResponseEntity.ok().body(appointment);
 			} else {
-				return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 			}
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
+			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(null);
 		}
 	}
 
 	@GetMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Appointment>> getAllAppointments() throws ParseException {
-			try {
+		try {
 			return ResponseEntity.ok().body(appointmentService.getAllAppointments());
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+	}
 
+	@GetMapping(value= "/{id}")
+	public ResponseEntity<Appointment> getAppointmentById(@PathVariable int id) {
+		try {
+			return ResponseEntity.ok().body(appointmentService.getAppointmentById(id));
+		} catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
 	}
 	
 	@DeleteMapping
-	public ResponseEntity<Appointment> DeleteAppointment(@RequestParam int id) {
+	public ResponseEntity<Appointment> deleteAppointment(@RequestParam int id) {
 		try {
 			appointmentService.deleteAppointment(id);
 		} catch(Exception e) {
