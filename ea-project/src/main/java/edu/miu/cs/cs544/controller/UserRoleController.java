@@ -40,15 +40,4 @@ public class UserRoleController {
 			return new Response(400, e.getMessage());
 		}
 	}
-
-	@GetMapping(value = "user/{userid}")
-	public Response getUserRolesByUserId(@PathVariable int userid) {
-		try {
-			List<String> roles = userRoleService.getUserRolesByUserId(userid);
-			return new Response(200, "successful", roles);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new Response(400, e.getMessage());
-		}
-	}
 }
