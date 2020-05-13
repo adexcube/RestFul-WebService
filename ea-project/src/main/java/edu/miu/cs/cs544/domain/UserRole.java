@@ -15,25 +15,22 @@ public class UserRole {
 	private int id;
 
 	@NotNull
-	private String roleName;
+	private int roleId;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	private User user;
-
-	public User getUser() {
-		return user;
+	public int getRoleId() {
+		return roleId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 
 	public UserRole() {
 
 	}
 
-	public UserRole(String roleName) {
-		this.roleName = roleName;
+	public UserRole(int roleId) {
+		this.roleId = roleId;
 	}
 
 	public int getId() {
@@ -42,14 +39,6 @@ public class UserRole {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getRoleName() {
-		return roleName;
-	}
-
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
 	}
 
 }

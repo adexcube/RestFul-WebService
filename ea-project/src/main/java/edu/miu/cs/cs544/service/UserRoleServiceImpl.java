@@ -28,12 +28,4 @@ public class UserRoleServiceImpl implements UserRoleService {
 		return userRoleRepository.findById(id).orElse(null);
 	}
 
-	@Override
-	public List<String> getUserRolesByUserId(int userid) {
-		List<String> roles = userRoleRepository.findAll().stream().filter(r -> r.getUser().getId() == userid).map(r -> r.getRoleName())
-				.collect(Collectors.toList());
-
-		return roles;
-	}
-
 }
