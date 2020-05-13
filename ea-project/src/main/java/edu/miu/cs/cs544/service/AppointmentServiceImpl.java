@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import edu.miu.cs.cs544.domain.Reservation;
-import edu.miu.cs.cs544.domain.Status;
+import edu.miu.cs.cs544.domain.*;
 import edu.miu.cs.cs544.repository.ReservationRepository;
 import edu.miu.cs.cs544.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.miu.cs.cs544.domain.Appointment;
-import edu.miu.cs.cs544.domain.User;
 import edu.miu.cs.cs544.repository.AppointmentRepository;
 
 import javax.annotation.PostConstruct;
@@ -73,16 +70,19 @@ public class AppointmentServiceImpl implements AppointmentService {
 		String location = "Verill Hall";
 		LocalDate date = LocalDate.now();
 		String d = date.getMonthValue() + "/" + date.getDayOfMonth() + "/" + date.getYear();
-		User checker = new User("Checker", "Doe", "johndoe@gmail.com", "Male", "John", "123");
-
+		List<UserRole> roles = new ArrayList<>();
+		roles.add(new UserRole("Checker"));
+		User checker = new User("Checker", "Doe", "johndoe@gmail.com", "Male", "John", "123", roles);
 		List<String> starts = null;
 		try {
 			starts = generateAppointmentStartTimes();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		List<UserRole> userroles = new ArrayList<>();
+		userroles.add(new UserRole("User"));
 		for (String s : starts) {
-			User user = new User("User-"+s, "Doe", "johndoe@gmail.com", "Male", "John", "123");
+			User user = new User("User-"+s, "Doe", "johndoe@gmail.com", "Male", "John", "123", userroles);
 			Appointment appointment = new Appointment(d, s, location);
 			appointment.setProvider(checker);
 			System.out.println(appointment.toString());
