@@ -1,6 +1,7 @@
 package edu.miu.cs.cs544.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,20 +19,27 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	@Override
-	public void createUser(User user) {
-		if (!usernameExists(user.getUsername()))
+	public String createUser(User user) {
+		if (!usernameExists(user.getUsername())) {
 			userRepository.save(user);
+
+			return "User created Successfully";
+		}
+
+		return "Username already Exists";
 	}
 
 	@Override
-	public void updateUser(int id, User user) {
+	public String updateUser(int id, User user) {
 		user.setId(id);
 		userRepository.save(user);
+		return "User updated Successfully";
 	}
 
 	@Override
-	public void deleteUser(int id) {
+	public String deleteUser(int id) {
 		userRepository.deleteById(id);
+		return "User deleted Successfully";
 
 	}
 
@@ -49,6 +57,17 @@ public class UserServiceImpl implements UserService {
 	public Boolean usernameExists(String username) {
 		int count = (int) userRepository.findAll().stream().filter(u -> u.getUsername().equals(username)).count();
 		return count > 0;
+	}
+
+	@Override
+	public String login(String username, String password) {
+		Optional<User> user = userRepository.findAll().stream()
+				.filter(u -> u.getUsername().equals(username) && u.getPassword().equals(password)).findFirst();
+
+		if (user != null)
+			return "User logged in Successfully";
+
+		return "Invalid Credentails";
 	}
 
 }
