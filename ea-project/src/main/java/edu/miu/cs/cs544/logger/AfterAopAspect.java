@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.context.annotation.Configuration;
 
 import edu.miu.cs.cs544.service.Response;
+import org.springframework.http.ResponseEntity;
 
 @Aspect
 @Configuration
@@ -17,8 +18,8 @@ public class AfterAopAspect implements ILogger {
 
 	@AfterReturning(value = "execution(* edu.miu.cs.cs544.controller.*.*(..))", returning = "result")
 	public void afterReturning(JoinPoint joinPoint, Object result) {
-		Response  response = (Response)result;
-		String text = String.format(joinPoint + " returned with value " + response.getMessage());
+		ResponseEntity response = (ResponseEntity) result;
+		String text = String.format(joinPoint + " returned with value " + response.getBody());
 		log(text);
 	}
 
