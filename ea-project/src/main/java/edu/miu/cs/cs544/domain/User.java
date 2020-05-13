@@ -40,7 +40,7 @@ public class User {
 	}
 
 	public User(String firstname, String lastname, @Email String email, String gender, String username,
-			String password) {
+			String password,List<UserRole> roles) {
 
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -48,6 +48,7 @@ public class User {
 		this.gender = gender;
 		this.username = username;
 		this.password = password;
+		this.roles = roles;
 	}
 
 	public int getId() {

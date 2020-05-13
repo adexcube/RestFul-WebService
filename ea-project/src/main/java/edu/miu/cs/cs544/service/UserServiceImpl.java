@@ -1,5 +1,6 @@
 package edu.miu.cs.cs544.service;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.miu.cs.cs544.domain.User;
+import edu.miu.cs.cs544.domain.UserRole;
 import edu.miu.cs.cs544.repository.UserRepository;
 
 @Service
@@ -21,6 +23,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String createUser(User user) {
 		if (!usernameExists(user.getUsername())) {
+			
+			for (UserRole role : user.getRoles()) {
+				role.setUser(user);
+			}
 			userRepository.save(user);
 
 			return "User created Successfully";
