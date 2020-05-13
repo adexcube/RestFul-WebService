@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String createUser(User user) {
 		if (!usernameExists(user.getUsername())) {
-			
+
 			for (UserRole role : user.getRoles()) {
 				role.setUser(user);
 			}
@@ -67,13 +67,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String login(String username, String password) {
-		Optional<User> user = userRepository.findAll().stream()
-				.filter(u -> u.getUsername().equals(username) && u.getPassword().equals(password)).findFirst();
+		Boolean exists = userRepository.findAll().stream()
+				.anyMatch(u -> u.getUsername().equals(username) && u.getPassword().equals(password));
 
-		if (user != null)
-			return "User logged in Successfully";
-
-		return "Invalid Credentails";
+		return exists ? "User logged in Successfully" : "Invalid Credentails";
 	}
 
 }

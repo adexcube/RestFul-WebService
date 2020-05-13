@@ -82,8 +82,8 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public Response login(@ModelAttribute("user") User user) {
+	@GetMapping(value = "/login")
+	public Response login(@RequestBody User user) {
 		try {
 			String result = userService.login(user.getUsername(), user.getPassword());
 			return new Response(200, result);

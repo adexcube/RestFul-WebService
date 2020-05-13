@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.miu.cs.cs544.domain.UserRole;
+import edu.miu.cs.cs544.service.Response;
 import edu.miu.cs.cs544.service.UserRoleService;
 
 @RestController
@@ -17,33 +18,37 @@ public class UserRoleController {
 	@Autowired
 	private UserRoleService userRoleService;
 
-	@GetMapping(value = "all")
-	public List<UserRole> getAllUserRoles() {
+	@GetMapping
+	public Response getAllUserRoles() {
 		try {
-			return userRoleService.getAllUserRoles();
+			List<UserRole> roles = userRoleService.getAllUserRoles();
+			return new Response(200, "successful", roles);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new Response(400, e.getMessage());
 		}
-		return null;
+
 	}
 
 	@GetMapping(value = "/{id}")
-	public UserRole getUserRoleById(@PathVariable int id) {
+	public Response getUserRoleById(@PathVariable int id) {
 		try {
-			return userRoleService.getUserRoleById(id);
+			UserRole role = userRoleService.getUserRoleById(id);
+			return new Response(200, "successful", role);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new Response(400, e.getMessage());
 		}
-		return null;
 	}
 
 	@GetMapping(value = "user/{userid}")
-	public List<UserRole> getUserRolesByUserId(@PathVariable int userid) {
+	public Response getUserRolesByUserId(@PathVariable int userid) {
 		try {
-			return userRoleService.getUserRolesByUserId(userid);
+			List<String> roles = userRoleService.getUserRolesByUserId(userid);
+			return new Response(200, "successful", roles);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new Response(400, e.getMessage());
 		}
-		return null;
 	}
 }
