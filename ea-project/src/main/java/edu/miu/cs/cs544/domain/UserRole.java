@@ -15,22 +15,22 @@ public class UserRole {
 	private int id;
 
 	@NotNull
-	private int roleId;
+	private String roleName;
 
-	public int getRoleId() {
-		return roleId;
+	public String getRoleName() {
+		return roleName;
 	}
 
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 	public UserRole() {
 
 	}
 
-	public UserRole(int roleId) {
-		this.roleId = roleId;
+	public UserRole(String roleNam) {
+		this.roleName = roleName;
 	}
 
 	public int getId() {

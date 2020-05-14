@@ -28,4 +28,10 @@ public class UserRoleServiceImpl implements UserRoleService {
 		return userRoleRepository.findById(id).orElse(null);
 	}
 
+	@Override
+	public void createUserRole(UserRole userrole) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
