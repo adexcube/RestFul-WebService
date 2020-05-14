@@ -93,7 +93,6 @@ public class User {
 		this.gender = gender;
 	}
 
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
