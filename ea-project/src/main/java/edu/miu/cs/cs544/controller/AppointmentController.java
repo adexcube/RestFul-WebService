@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import edu.miu.cs.cs544.domain.Appointment;
+import edu.miu.cs.cs544.domain.Role;
 import edu.miu.cs.cs544.domain.User;
 import edu.miu.cs.cs544.service.AppointmentService;
 import edu.miu.cs.cs544.service.UserService;
@@ -25,8 +26,6 @@ public class AppointmentController {
 	@Autowired
 	UserService userService;
 
-	@ResponseBody
-	//create appointment controller method
 	@PostMapping(value = "new/{id}")
 	public ResponseEntity createAppoinment(@PathVariable int id, @RequestParam("date") String date, 
 							@RequestParam("location") String location, @RequestParam("time") String time) {
@@ -34,9 +33,15 @@ public class AppointmentController {
 			User user = userService.getUserById(id);
 			  Appointment appointment = new Appointment(date, time, location);
 			if(user != null) {
-				appointment.setProvider(user);
-				appointmentService.createAppointment(appointment);
-				return ResponseEntity.ok().body("Succeed");
+				String role = user.getRole().getRoleName();
+				if(role.equals(Role.CHECKER.name())) {
+					appointment.setProvider(user);
+					appointmentService.createAppointment(appointment);
+					return ResponseEntity.ok().body("Succeed");
+				} else {
+					return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Access denied");
+				}
+				
 			} else {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed");
 			}
