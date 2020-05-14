@@ -114,4 +114,12 @@ public class Appointment {
 		return "Appointment{" + "id=" + id + ", date=" + date + ", time=" + time + ", location='" + location + '\''
 				+ ", provider=" + provider + '}';
 	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
 }

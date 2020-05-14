@@ -1,5 +1,7 @@
 package edu.miu.cs.cs544.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
@@ -23,6 +25,7 @@ public class Reservation {
 	private User consumer;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
+	@JsonBackReference
 	private Appointment appointment;
 	
 	public Reservation() {
