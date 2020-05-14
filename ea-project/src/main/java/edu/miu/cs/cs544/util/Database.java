@@ -2,6 +2,7 @@ package edu.miu.cs.cs544.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;

@@ -13,7 +13,6 @@ public class EaProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EaProjectApplication.class, args);
-
 		Util.generateAppointmentsForLocation();
 	}
 

@@ -2,6 +2,7 @@ package edu.miu.cs.cs544.controller;
 
 //import java.util.List;
 
+import edu.miu.cs.cs544.domain.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -30,17 +31,12 @@ public class AppointmentController {
 	@PostMapping(value = "/new/{id}")
 	public ResponseEntity createAppoinment(@PathVariable int id, @RequestParam("date") String date, 
 							@RequestParam("location") String location, @RequestParam("time") String time) {
-		System.out.println(id);
-		System.out.println(date);
-		System.out.println(location);
-		System.out.println(time);
 		try {
 			User user = userService.getUserById(id);
 			  Appointment appointment = new Appointment(date, time, location);
 			if(user != null) {
-				List<Integer> roles = user.getRoles().stream().map(r -> r.getRoleid()).collect(Collectors.toList());
-
-				if(roles.contains(Role.CHECKER.name())) {
+				List<Integer> roles = user.getRoles().stream().map(UserRole::getRoleid).collect(Collectors.toList());
+				if(roles.contains(Role.CHECKER.getNumVal())) {
 					appointment.setProvider(user);
 					appointmentService.createAppointment(appointment);
 					return ResponseEntity.ok().body("Succeed");
