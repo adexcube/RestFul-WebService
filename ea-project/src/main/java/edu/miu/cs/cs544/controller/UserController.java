@@ -30,7 +30,7 @@ public class UserController {
 	@Autowired
 	private UserRoleService userRoleService;
 
-	@PostMapping(value="/new/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value="/new", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity createUser(@RequestBody User user) {
 		try {
 			String result = userService.createUser(user);
