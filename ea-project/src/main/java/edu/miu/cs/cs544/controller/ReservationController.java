@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -42,7 +43,7 @@ public class ReservationController {
         try {
             User user = userService.getUserById(userId);
             Appointment appointment = appointmentService.getAppointmentById(appointId);
-            Reservation reservation = new Reservation(Status.PENDING, LocalDate.now().toString(), user, appointment);
+            Reservation reservation = new Reservation(Status.PENDING, LocalDate.now().toString(), LocalTime.now().toString(), user, appointment);
             reservationService.createReservation(reservation);
             return new Response(200, "Success", null);
         } catch (Exception ex) {
@@ -55,7 +56,7 @@ public class ReservationController {
         try {
             User user = userService.getUserById(userId);
             Appointment appointment = appointmentService.getAppointmentById(appointId);
-            Reservation reservation = new Reservation(Status.ACCEPTED, LocalDate.now().toString(), user, appointment);
+            Reservation reservation = new Reservation(Status.ACCEPTED, LocalDate.now().toString(), LocalTime.now().toString(), user, appointment);
             reservationService.approveReservation(reservation);
             return new Response(200, "Success", null);
         } catch (Exception ex) {
