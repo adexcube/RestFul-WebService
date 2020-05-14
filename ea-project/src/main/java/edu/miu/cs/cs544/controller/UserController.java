@@ -30,22 +30,7 @@ public class UserController {
 	@Autowired
 	private UserRoleService userRoleService;
 
-//<<<<<<< HEAD
-//	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity createUser(@RequestBody User user) {
-//		try {
-//			String result = userService.createUser(user);
-//			return ResponseEntity.status(HttpStatus.OK).body(result);
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-//		}
-//	}
-//	@PostMapping(value="/new/{id}")
-//	public ResponseEntity createUser(@PathVariable int id, @RequestParam("firstname") String fn, @RequestParam("lastname") String ln,
-//			 @RequestParam("email") String mail, @RequestParam("gender") String gd, @RequestParam("username") String un, @RequestParam("password") String pw) {
-//		UserRole ur = userRoleService.getUserRoleById(id);
-	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value="/new/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity createUser(@RequestBody User user) {
 		try {
 			String result = userService.createUser(user);
