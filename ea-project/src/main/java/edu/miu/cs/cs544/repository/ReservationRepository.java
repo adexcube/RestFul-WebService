@@ -7,5 +7,5 @@ import edu.miu.cs.cs544.domain.Reservation;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
-    public void removeReservationByStatus();
+//    public void removeReservationByStatus();
 }
