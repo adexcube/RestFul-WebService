@@ -57,6 +57,10 @@ public class ReservationController {
             User user = userService.getUserById(userId);
             Appointment appointment = appointmentService.getAppointmentById(appointId);
             Reservation reservation = new Reservation(Status.ACCEPTED, LocalDate.now().toString(), LocalTime.now().toString(), user, appointment);
+            appointmentService.get
+            reservationService.getAllReservations();
+
+            reservationService.getReservationById()
             reservationService.approveReservation(reservation);
             return new Response(200, "Success", null);
         } catch (Exception ex) {
@@ -70,6 +74,7 @@ public class ReservationController {
 //////            User user = userService.getUserById(userId);
 //////            Ap
 ////        }
+//
 //    }
 
 }
