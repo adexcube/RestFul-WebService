@@ -47,7 +47,7 @@ public class Email {
 		return con;
 	}
 
-	public void notificationAppointmentStatus() throws SQLException {
+	public void test() throws SQLException {
 
 		Connection connection = null;
 		Statement insertStmt = null;
@@ -160,6 +160,7 @@ public class Email {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println("Exception happend at : appointmentReminder()");
 		}
 	}
 

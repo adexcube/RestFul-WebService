@@ -94,7 +94,7 @@ public class ScheduledTasks {
 			}
 
 			// update reservation.status=HANDLED
-			rs = selectStmt.executeQuery("update reservation set state=3 where status=2;");
+			rs = selectStmt.executeQuery("update reservation set status=3 where status=2;");
 			System.out.println("reservation table status updated");
 
 		} catch (Exception e) {
