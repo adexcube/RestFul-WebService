@@ -41,6 +41,26 @@ public class Util1 {
 		LocalDate date = LocalDate.now();
 		String d = date.getMonthValue() + "/" + date.getDayOfMonth() + "/" + date.getYear();
 
+		for (int i = 0; i < 3; i++) {
+			try {
+				Connection con = getConnection();
+				PreparedStatement ps = con.prepareStatement("insert into userrole (id, roleName) values (?, ?)");
+				ps.setString(1, null);
+				if (i == 0) {
+					ps.setString(2, Role.ADMIN.name());
+				} else if (i == 1) {
+					ps.setString(2, Role.CHECKER.name());
+				} else if (i == 2) {
+					ps.setString(2, Role.STUDENT.name());
+				}
+
+				int j = ps.executeUpdate();
+				System.out.println(j + " records userrole 2");
+			} catch (Exception e) {
+				System.err.println(e);
+			}
+		}
+
 		User admin = new User("Admin", "Doe", "admin@gmail.com", "Male", "John Admin", "123");
 		try {
 			Connection con = getConnection();
