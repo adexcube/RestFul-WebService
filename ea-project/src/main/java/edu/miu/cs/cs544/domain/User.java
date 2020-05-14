@@ -93,7 +93,6 @@ public class User {
 		this.gender = gender;
 	}
 
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -108,9 +107,5 @@ public class User {
 
 	public void addRole(UserRole role) {
 		this.roles.add(role);
-	}
-
-	public String getUsername() {
-		return username;
 	}
 }
