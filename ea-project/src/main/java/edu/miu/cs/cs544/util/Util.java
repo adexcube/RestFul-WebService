@@ -41,31 +41,11 @@ public class Util {
 		LocalDate date = LocalDate.now();
 		String d = date.getMonthValue() + "/" + date.getDayOfMonth() + "/" + date.getYear();
 
-		for (int i = 0; i < 3; i++) {
-			try {
-				Connection con = getConnection();
-				PreparedStatement ps = con.prepareStatement("insert into userrole (id, roleName) values (?, ?)");
-				ps.setString(1, null);
-				if (i == 0) {
-					ps.setString(2, Role.ADMIN.name());
-				} else if (i == 1) {
-					ps.setString(2, Role.CHECKER.name());
-				} else if (i == 2) {
-					ps.setString(2, Role.STUDENT.name());
-				}
-
-				int j = ps.executeUpdate();
-				System.out.println(j + " records userrole 2");
-			} catch (Exception e) {
-				System.err.println(e);
-			}
-		}
-
 		User admin = new User("Admin", "Doe", "admin@gmail.com", "Male", "John Admin", "123");
 		try {
 			Connection con = getConnection();
 			PreparedStatement ps = con.prepareStatement(
-					"insert into user (id, firstname, lastname, email, gender, username, password,role_id) values (?, ?, ?, ?, ?, ?, ?, ?)");
+					"insert into user (id, firstname, lastname, email, gender, username, password) values (?, ?, ?, ?, ?, ?, ?)");
 
 			ps.setString(1, null);
 			ps.setString(2, admin.getFirstname());
@@ -74,10 +54,38 @@ public class Util {
 			ps.setString(5, admin.getGender());
 			ps.setString(6, admin.getUsername());
 			ps.setString(7, admin.getPassword());
-			ps.setInt(8, Role.ADMIN.getNumVal());
 
 			int i = ps.executeUpdate();
 			System.out.println(i + " records");
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+		
+		int adminid = 0;
+		try {
+			Connection con = getConnection();
+			ResultSet rs = con.createStatement()
+					.executeQuery("select id from user where username = '" + admin.getUsername() + "'");
+			while (rs.next()) {
+				System.out.println("id >>>>>>>>" + rs.getInt(1));
+				adminid = rs.getInt(1);
+			}
+
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+		
+		
+		try {
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement("insert into userrole (roleid, user_id) values (?, ?)");
+			
+			ps.setInt(1, Role.ADMIN.getNumVal());
+			ps.setInt(2, adminid);
+			
+
+			int j = ps.executeUpdate();
+			System.out.println(j + " records userrole 1");
 		} catch (Exception e) {
 			System.err.println(e);
 		}
@@ -86,7 +94,7 @@ public class Util {
 		try {
 			Connection con = getConnection();
 			PreparedStatement ps = con.prepareStatement(
-					"insert into user (id, firstname, lastname, email, gender, username, password,role_id) values (?, ?, ?, ?, ?, ?, ?, ?)");
+					"insert into user (id, firstname, lastname, email, gender, username, password) values (?, ?, ?, ?, ?, ?, ?)");
 
 			ps.setString(1, null);
 			ps.setString(2, checker.getFirstname());
@@ -95,7 +103,7 @@ public class Util {
 			ps.setString(5, checker.getGender());
 			ps.setString(6, checker.getUsername());
 			ps.setString(7, checker.getPassword());
-			ps.setInt(8, Role.CHECKER.getNumVal());
+			
 
 			int i = ps.executeUpdate();
 			System.out.println(i + " records");
@@ -117,6 +125,20 @@ public class Util {
 		} catch (Exception e) {
 			System.err.println(e);
 		}
+		
+		try {
+			Connection con = getConnection();
+			PreparedStatement ps = con.prepareStatement("insert into userrole (roleid, user_id) values (?, ?)");
+			
+			ps.setInt(1, Role.CHECKER.getNumVal());
+			ps.setInt(2, checkerid);
+			
+
+			int j = ps.executeUpdate();
+			System.out.println(j + " records userrole 2");
+		} catch (Exception e) {
+			System.err.println(e);
+		}
 
 		List<String> starts = null;
 		try {
@@ -131,7 +153,7 @@ public class Util {
 			try {
 				Connection con = getConnection();
 				PreparedStatement ps = con.prepareStatement(
-						"insert into user (id, firstname, lastname, email, gender, username, password, role_id) values (?, ?, ?, ?, ?, ?, ?, ?)");
+						"insert into user (id, firstname, lastname, email, gender, username, password) values (?, ?, ?, ?, ?, ?, ?)");
 				ps.setString(1, null);
 				ps.setString(2, user.getFirstname());
 				ps.setString(3, user.getLastname());
@@ -139,7 +161,6 @@ public class Util {
 				ps.setString(5, user.getGender());
 				ps.setString(6, user.getUsername());
 				ps.setString(7, user.getPassword());
-				ps.setInt(8, Role.STUDENT.getNumVal());
 
 				int i = ps.executeUpdate();
 				System.out.println(i + " records user 1");
@@ -156,6 +177,19 @@ public class Util {
 					System.out.println("id >>>>>>>>" + rs.getInt(1));
 					userid = rs.getInt(1);
 				}
+			} catch (Exception e) {
+				System.err.println(e);
+			}
+			
+			try {
+				Connection con = getConnection();
+				PreparedStatement ps = con.prepareStatement("insert into userrole (roleid, user_id) values (?, ?)");
+				ps.setInt(1, Role.STUDENT.getNumVal());
+				ps.setInt(2, userid);
+				
+
+				int j = ps.executeUpdate();
+				System.out.println(j + " records userrole 1");
 			} catch (Exception e) {
 				System.err.println(e);
 			}
