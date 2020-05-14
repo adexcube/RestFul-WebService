@@ -57,11 +57,11 @@ public class ScheduledTasks {
 		Statement insertStmt = null;
 		Statement selectStmt = null;
 
-		System.out.println("Table contains ows");
+		// System.out.println("Table contains ows");
 
 		try {
 
-			System.out.println("inside try ");
+			System.out.println("emailAppointmentStatus() ");
 
 			StringBuffer sb = new StringBuffer();
 			Connection con = getConnection();
@@ -71,17 +71,17 @@ public class ScheduledTasks {
 
 			while (rs.next()) {
 
-				System.out.println("Email processing .... ");
+				// System.out.println("Email processing .... ");
 
 				String firstname = rs.getString(1);
 				String lastname = rs.getString(2);
 				String email = rs.getString(3);
-				String dateAndTime = rs.getString(4);
+				String appointmentDate = rs.getString(4);
 
 				String to = email;
 				String subject = "your Appointment Approved";
 				String body = " Dear " + firstname + " " + lastname + ",";
-				body += " your Appointment  on " + dateAndTime + " is Approved";
+				body += " your Appointment  on " + appointmentDate + " is Approved";
 
 				SimpleMailMessage emailMessage = new SimpleMailMessage();
 
@@ -91,9 +91,11 @@ public class ScheduledTasks {
 				emailMessage.setText(body);
 
 				javaMailSender.send(emailMessage);
-
-				// update reservation.status=HANDLED
 			}
+
+			// update reservation.status=HANDLED
+			rs = selectStmt.executeQuery("update reservation set state=3 where status=2;");
+			System.out.println("reservation table status updated");
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -105,16 +107,14 @@ public class ScheduledTasks {
 	/**
 	 * trigger at 10 AM every Monday-Friday
 	 * 
-	 * @Scheduled(cron = "15 * * * * * MON-FRI") //for testing
 	 */
-
-	// @Scheduled(cron = "0 0 10 ? * MON-FRI")
+	@Scheduled(cron = "0 0 10 ? * MON-FRI")
 	public void emailRemainder() {
 
 		try {
 			Email email = new Email();
 			email.appointmentReminder();
-			System.out.println("Email.appointmentReminder():  run every Day at 10:00 AM to Remaind Students ");
+			System.out.println("Email.emailRemainder():  run every Day at 10:00 AM to Remaind Students ");
 
 		} catch (Exception e) {
 			// TODO: handle exception

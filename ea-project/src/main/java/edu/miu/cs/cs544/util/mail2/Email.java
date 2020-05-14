@@ -5,15 +5,23 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Email {
 
 	@Autowired
 	private JavaMailSender javaMailSender;
+
+	@Value("${spring.mail.username}")
+	private String from;
 
 	public enum STATUS {
 		PENDING, APPROVED, DECLINE
@@ -59,7 +67,7 @@ public class Email {
 
 			while (rs.next()) {
 
-				System.out.println("Email processing .... ");
+				// System.out.println("Email processing .... ");
 
 				String firstname = rs.getString(1);
 				String lastname = rs.getString(2);
@@ -103,34 +111,55 @@ public class Email {
 		Statement insertStmt = null;
 		Statement selectStmt = null;
 
+		// System.out.println("Table contains ows");
+
 		try {
+
+			System.out.println("inside try ");
 
 			StringBuffer sb = new StringBuffer();
 			Connection con = getConnection();
 			selectStmt = con.createStatement();
-			ResultSet rs = selectStmt.executeQuery(
-					"SELECT u.firstname, u.lastname, u.email FROM reservation r JOIN user u on r.consumer_id=u.id and r.status=2");
-
-			System.out.println("Table contains " + rs.getInt("count(*)") + " rows");
+			ResultSet rs = selectStmt.executeQuery("SELECT u.firstname, u.lastname,u.email,r.dateAndTime "
+					+ "FROM reservation r JOIN user u " + "on r.consumer_id=u.id and r.status=2");
 
 			while (rs.next()) {
 
-				System.out.println("Email processing .... ");
+				// System.out.println("Email processing .... ");
 
-				sb.append("ID: " + rs.getString(1));
-				sb.append("From: " + rs.getString(2));
-				sb.append("To : " + rs.getString(3));
-				sb.append("Subject: " + rs.getString(4));
-				sb.append("Body: " + rs.getString(5));
-				sb.append("Date : " + rs.getString(6));
-				sb.append("status : " + rs.getString(7));
+				String firstname = rs.getString(1);
+				String lastname = rs.getString(2);
+				String email = rs.getString(3);
+				String appointmentDate = rs.getString(4);
 
-				System.out.println(sb.toString());
+				LocalDate currentDate = LocalDate.now();
+				// Parsing the date
+				LocalDate appointmentDate2 = LocalDate.parse(appointmentDate);
+
+				long noOfDaysBetween = ChronoUnit.DAYS.between(currentDate, appointmentDate2);
+
+				// displaying the number of days
+				System.out.println("noOfDaysBetween:" + noOfDaysBetween);
+
+				// 24 means one day
+				if (noOfDaysBetween == 1) {
+					String to = email;
+					String subject = "TM appointment Remainder";
+					String body = " Dear " + firstname + " " + lastname + ",";
+					body += " your Appointment  on " + appointmentDate2 + " goint to be tomorrow, so get ready";
+
+					SimpleMailMessage emailMessage = new SimpleMailMessage();
+
+					emailMessage.setFrom(from);
+					emailMessage.setTo(to);
+					emailMessage.setSubject(subject);
+					emailMessage.setText(body);
+
+					javaMailSender.send(emailMessage);
+				}
 			}
-
 		} catch (Exception e) {
-
-			// e.printStackTrace();
+			// TODO: handle exception
 		}
 	}
 
@@ -144,18 +173,5 @@ public class Email {
 		simpleMailMessage.setText(body);
 
 		javaMailSender.send(simpleMailMessage);
-	}
-
-	public void sendEmail() {
-
-		SimpleMailMessage msg = new SimpleMailMessage();
-
-		msg.setFrom("birg20@gmail.com");
-		msg.setTo("birg2000@gmail.com", "birg20@gmail.com");
-		msg.setSubject("Testing from Spring Boot");
-		msg.setText("Hello World \n Spring Boot Email");
-
-		javaMailSender.send(msg);
-
 	}
 }
