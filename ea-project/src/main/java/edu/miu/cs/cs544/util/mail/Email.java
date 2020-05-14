@@ -20,11 +20,11 @@ public class Email {
 	@Autowired
 	private JavaMailSender javaMailSender;
 
-	public void setMailSender(JavaMailSender javaMailSender) {
-
-		this.javaMailSender = javaMailSender;
-
-	}
+//	public void setMailSender(JavaMailSender javaMailSender) {
+//
+//		this.javaMailSender = javaMailSender;
+//
+//	}
 
 	public static Connection getConnection() {
 		Connection con = null;
@@ -159,6 +159,17 @@ public class Email {
 		msg.setText("Hello World \n Spring Boot Email");
 
 		javaMailSender.send(msg);
+
+		SimpleMailMessage msg1 = new SimpleMailMessage();
+
+		msg.setFrom("brook1kenfemichael@gmail.com");
+		msg.setTo("brook1kenfemichael@gmail.com", "brook1kenfemichael@gmail.com");
+		msg.setSubject("Testing from Spring Boot");
+		msg.setText("Hello World \n Spring Boot Email");
+
+		javaMailSender.send(msg1);
+
+
 
 	}
 }

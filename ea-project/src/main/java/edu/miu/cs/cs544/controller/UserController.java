@@ -40,7 +40,7 @@ public class UserController {
 //			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 //		}
 //	}
-	@PostMapping(value="new/{id}")
+	@PostMapping(value="/new/{id}")
 	public ResponseEntity createUser(@PathVariable int id, @RequestParam("firstname") String fn, @RequestParam("lastname") String ln,
 			 @RequestParam("email") String mail, @RequestParam("gender") String gd, @RequestParam("username") String un, @RequestParam("password") String pw) {
 		UserRole ur = userRoleService.getUserRoleById(id);

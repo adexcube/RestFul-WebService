@@ -26,9 +26,13 @@ public class AppointmentController {
 	@Autowired
 	UserService userService;
 
-	@PostMapping(value = "new/{id}")
+	@PostMapping(value = "/new/{id}")
 	public ResponseEntity createAppoinment(@PathVariable int id, @RequestParam("date") String date, 
 							@RequestParam("location") String location, @RequestParam("time") String time) {
+		System.out.println(id);
+		System.out.println(date);
+		System.out.println(location);
+		System.out.println(time);
 		try {
 			User user = userService.getUserById(id);
 			  Appointment appointment = new Appointment(date, time, location);
