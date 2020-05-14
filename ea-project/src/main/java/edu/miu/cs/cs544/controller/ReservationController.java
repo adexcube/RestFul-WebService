@@ -20,7 +20,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/{userId}/reservation")
+@RequestMapping("/{userId}/reservations")
 public class ReservationController {
     @Autowired
     private ReservationService reservationService;

@@ -14,23 +14,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static edu.miu.cs.cs544.util.Database.*;
+
 public class Util {
 
-	public static Connection getConnection() {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cs544?verifyServerCertificate=false&useSSL=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=America/Chicago", "ea", "ea123");
 
-		} catch (Exception e) {
-
-			System.out.println(e);
-		}
-		return con;
-	}
-
-	public static SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
-	public static SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
 
 	public static void main(String[] args) {
 		generateAppointmentsForLocation();
@@ -243,17 +231,6 @@ public class Util {
 				System.err.println(e);
 			}
 		}
-	}
-
-	public static List<String> generateAppointmentStartTimes() throws ParseException {
-		List<String> t = new ArrayList<>();
-		LocalTime starttime = LocalTime.of(8, 30);
-		for (int i = 1; i <= 15; i++) {
-			starttime = starttime.plusMinutes(30);
-			Date _24HourDt = _24HourSDF.parse(String.valueOf(starttime));
-			t.add(_12HourSDF.format(_24HourDt));
-		}
-		return t;
 	}
 
 }
