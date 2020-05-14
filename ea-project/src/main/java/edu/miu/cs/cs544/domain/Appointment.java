@@ -19,26 +19,26 @@ import javax.persistence.TemporalType;
 @Entity
 public class Appointment {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 //	@Temporal(TemporalType.DATE)
 	private String date;
 //	@Temporal(TemporalType.TIME)
 	private String time;
 	private String location;
-	
-	@ManyToOne//(cascade=CascadeType.ALL)
-	@JoinColumn(name="provider_id")
+
+	@ManyToOne // (cascade=CascadeType.ALL)
+	@JoinColumn(name = "provider_id")
 	private User provider;
-	
-	@OneToMany(mappedBy="appointment")
+
+	@OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL)
 	private List<Reservation> reservations;
-	
+
 //	private static DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
 //			Locale.US);
 //	private static DateFormat tf = DateFormat.getTimeInstance(DateFormat.SHORT,
 //			Locale.US);
-	
+
 	public Appointment() {
 		super();
 	}
@@ -111,12 +111,15 @@ public class Appointment {
 
 	@Override
 	public String toString() {
-		return "Appointment{" +
-				"id=" + id +
-				", date=" + date +
-				", time=" + time +
-				", location='" + location + '\'' +
-				", provider=" + provider +
-				'}';
+		return "Appointment{" + "id=" + id + ", date=" + date + ", time=" + time + ", location='" + location + '\''
+				+ ", provider=" + provider + '}';
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
 	}
 }

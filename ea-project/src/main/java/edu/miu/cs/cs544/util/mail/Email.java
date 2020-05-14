@@ -31,7 +31,7 @@ public class Email {
 		try {
 
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cs544", "ea", "ea123");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cs544?verifyServerCertificate=false&useSSL=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=America/Chicago", "ea", "ea123");
 
 		} catch (Exception e) {
 

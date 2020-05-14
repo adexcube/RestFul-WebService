@@ -28,4 +28,11 @@ public class UserRoleServiceImpl implements UserRoleService {
 		return userRoleRepository.findById(id).orElse(null);
 	}
 
+	@Override
+	public String createUserRole(UserRole userrole) {
+		userRoleRepository.save(userrole);
+		return "User Role created Successfully";
+		
+	}
+
 }

@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.miu.cs.cs544.domain.User;
+import edu.miu.cs.cs544.domain.UserRole;
 import edu.miu.cs.cs544.service.Response;
+import edu.miu.cs.cs544.service.UserRoleService;
 import edu.miu.cs.cs544.service.UserService;
 
 @RestController
@@ -24,12 +27,32 @@ import edu.miu.cs.cs544.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserRoleService userRoleService;
 
-	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity createUser(@RequestBody User user) {
+//	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity createUser(@RequestBody User user) {
+//		try {
+//			String result = userService.createUser(user);
+//			return ResponseEntity.status(HttpStatus.OK).body(result);
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+//		}
+//	}
+	@PostMapping(value="new/{id}")
+	public ResponseEntity createUser(@PathVariable int id, @RequestParam("firstname") String fn, @RequestParam("lastname") String ln,
+			 @RequestParam("email") String mail, @RequestParam("gender") String gd, @RequestParam("username") String un, @RequestParam("password") String pw) {
+		UserRole ur = userRoleService.getUserRoleById(id);
 		try {
-			String result = userService.createUser(user);
-			return ResponseEntity.status(HttpStatus.OK).body(result);
+			if(ur!=null) {
+				User user = new User(fn,ln,mail,gd,un,pw);
+				user.setRole(ur);
+				String result = userService.createUser(user);
+				return ResponseEntity.status(HttpStatus.OK).body("Succeed.");
+			} else {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed");
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -77,16 +100,5 @@ public class UserController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 
-	}
-
-	@GetMapping(value = "/login")
-	public ResponseEntity login(@RequestBody User user) {
-		try {
-			String result = userService.login(user.getUsername(), user.getPassword());
-			return ResponseEntity.status(HttpStatus.OK).body(result);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-		}
 	}
 }

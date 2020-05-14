@@ -1,9 +1,6 @@
 package edu.miu.cs.cs544.service;
 
-import java.text.ParseException;
 import java.util.List;
-
-import org.springframework.stereotype.Service;
 
 import edu.miu.cs.cs544.domain.Appointment;
 
