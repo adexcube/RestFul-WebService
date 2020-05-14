@@ -64,4 +64,12 @@ public class ReservationController {
         }
     }
 
+//    @PostMapping("/{checkerId}")
+//    public Response declineReservation(@PathVariable int userId, @PathVariable int appointId) {
+////        try {
+//////            User user = userService.getUserById(userId);
+//////            Ap
+////        }
+//    }
+
 }

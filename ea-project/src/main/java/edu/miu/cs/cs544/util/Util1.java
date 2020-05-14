@@ -152,34 +152,34 @@ public class Util1 {
                 System.err.println(e);
             }
 
-            int userid = 0;
-            try {
-                Connection con = getConnection();
-                System.out.println("=============");
-                System.out.println(user.getUsername());
-                ResultSet rs = con.createStatement().executeQuery("select * from user");
-                userid = rs.getInt(1);
-                System.out.println(userid);
-                while (rs.next()) {
-                    System.out.println("---");
-
-                    if(rs.getString(3).equals(user.getUsername())) {
-                        System.out.println(rs.getString(3));
-                        System.out.println(user.getUsername());
-                        userid = rs.getInt(1);
-                    }
-                }
-
-                System.out.println("========~22=====");
-                System.out.println(userid);
-            } catch (Exception e){
-                System.err.println(e);
-            }
+//            int userid = 0;
+//            try {
+//                Connection con = getConnection();
+//                System.out.println("=============");
+//                System.out.println(user.getUsername());
+//                ResultSet rs = con.createStatement().executeQuery("select * from user");
+//                userid = rs.getInt(1);
+//                System.out.println(userid);
+//                while (rs.next()) {
+//                    System.out.println("---");
+//
+//                    if(rs.getString(3).equals(user.getUsername())) {
+//                        System.out.println(rs.getString(3));
+//                        System.out.println(user.getUsername());
+//                        userid = rs.getInt(1);
+//                    }
+//                }
+//
+//                System.out.println("========~22=====");
+//                System.out.println(userid);
+//            } catch (Exception e){
+//                System.err.println(e);
+//            }
 
             for(int i = 0; i < 3; i ++) {
                 try {
                     Connection con = getConnection();
-                    PreparedStatement ps = con.prepareStatement("insert into userrole (id, roleId, userId) values (?, ?, ?)");
+                    PreparedStatement ps = con.prepareStatement("insert into userrole (id, roleName) values (?, ?)");
                     ps.setString(1, null);
                     if(i == 0) {
                         ps.setInt(2, Role.ADMIN.getNumVal());
@@ -189,7 +189,6 @@ public class Util1 {
                         ps.setInt(2, Role.STUDENT.getNumVal());
                     }
                     ps.setInt(2, Role.STUDENT.getNumVal());
-                    ps.setInt(3, userid);
 
                     int j = ps.executeUpdate();
                     System.out.println(j + " records userrole 2");
@@ -240,8 +239,8 @@ public class Util1 {
                 ps.setInt(2, Status.PENDING.getNumVal());
                 ps.setString(3, LocalDate.now().toString());
                 ps.setString(4, LocalTime.now().toString());
-                ps.setObject(5, user.getId());
-                ps.setObject(6, appointment.getId());
+                ps.setInt(5, 3);
+                ps.setInt(6, 3);
 
                 int i = ps.executeUpdate();
                 System.out.println(i + " records reservation");
