@@ -21,9 +21,7 @@ public class Appointment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-//	@Temporal(TemporalType.DATE)
 	private String date;
-//	@Temporal(TemporalType.TIME)
 	private String time;
 	private String location;
 
@@ -33,11 +31,6 @@ public class Appointment {
 
 	@OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL)
 	private List<Reservation> reservations;
-
-//	private static DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
-//			Locale.US);
-//	private static DateFormat tf = DateFormat.getTimeInstance(DateFormat.SHORT,
-//			Locale.US);
 
 	public Appointment() {
 		super();
@@ -67,30 +60,20 @@ public class Appointment {
 
 	public String getDate() {
 		return this.date;
-//		return df.format(date);
 	}
 
 	public void setDate(String date) {
-//		try {
-//			this.date = df.parse(date);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+
 		this.date = date;
 	}
 
 	public String getTime() {
 		return this.time;
-//		return tf.format(time);
 	}
 
 	public void setTime(String time) {
 		this.time = time;
-//		try {
-//			this.time = tf.parse(time);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+
 	}
 
 	public String getLocation() {

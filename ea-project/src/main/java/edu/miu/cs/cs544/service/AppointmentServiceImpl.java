@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.miu.cs.cs544.repository.AppointmentRepository;
 
-import javax.annotation.PostConstruct;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -39,13 +38,4 @@ public class AppointmentServiceImpl implements AppointmentService {
 			appointmentRepository.deleteById(id);
 	}
 
-//	public List<Appointment> getAllAppointment(int id) {
-////		appointmentRepository.findOne()
-//	}
-
-//	@PostConstruct
-//	public void generate() {
-//		Util util = new Util();
-//		Util.generateAppointmentsForLocation();
-//	}
 }
