@@ -121,7 +121,7 @@ public class Email {
 			Connection con = getConnection();
 			selectStmt = con.createStatement();
 			ResultSet rs = selectStmt.executeQuery("SELECT u.firstname, u.lastname,u.email,r.dateAndTime "
-					+ "FROM reservation r JOIN user u " + "on r.consumer_id=u.id and r.status=2");
+					+ "FROM reservation r JOIN user u " + "on r.consumer_id=u.id and r.status=1");
 
 			while (rs.next()) {
 
