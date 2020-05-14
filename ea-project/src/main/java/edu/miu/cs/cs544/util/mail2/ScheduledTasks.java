@@ -6,13 +6,14 @@
  *  from database table 
  * */
 
-package edu.miu.cs.cs544.util.mail;
+package edu.miu.cs.cs544.util.mail2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,9 +21,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CronJob {
+public class ScheduledTasks {
 
-	// @Autowired
+	@Autowired
 	private JavaMailSender javaMailSender;
 
 	@Value("${spring.mail.username}")
@@ -91,6 +92,7 @@ public class CronJob {
 
 				javaMailSender.send(emailMessage);
 
+				// update reservation.status=HANDLED
 			}
 
 		} catch (Exception e) {

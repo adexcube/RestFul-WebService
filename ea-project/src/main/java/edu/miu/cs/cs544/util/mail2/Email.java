@@ -1,4 +1,4 @@
-package edu.miu.cs.cs544.util.mail;
+package edu.miu.cs.cs544.util.mail2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,9 +9,7 @@ import java.sql.Statement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Service;
 
-@Service
 public class Email {
 
 	@Autowired
@@ -31,9 +29,7 @@ public class Email {
 		try {
 
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/cs544?verifyServerCertificate=false&useSSL=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=America/Chicago",
-					"ea", "ea123");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cs544", "ea", "ea123");
 
 		} catch (Exception e) {
 
