@@ -15,6 +15,7 @@ import edu.miu.cs.cs544.service.AppointmentService;
 import edu.miu.cs.cs544.service.UserService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.text.ParseException;
 
 @RestController
@@ -26,15 +27,20 @@ public class AppointmentController {
 	@Autowired
 	UserService userService;
 
-	@PostMapping(value = "new/{id}")
+	@PostMapping(value = "/new/{id}")
 	public ResponseEntity createAppoinment(@PathVariable int id, @RequestParam("date") String date, 
 							@RequestParam("location") String location, @RequestParam("time") String time) {
+		System.out.println(id);
+		System.out.println(date);
+		System.out.println(location);
+		System.out.println(time);
 		try {
 			User user = userService.getUserById(id);
 			  Appointment appointment = new Appointment(date, time, location);
 			if(user != null) {
-				String role = user.getRole().getRoleName();
-				if(role.equals(Role.CHECKER.name())) {
+				List<Integer> roles = user.getRoles().stream().map(r -> r.getRoleid()).collect(Collectors.toList());
+
+				if(roles.contains(Role.CHECKER.name())) {
 					appointment.setProvider(user);
 					appointmentService.createAppointment(appointment);
 					return ResponseEntity.ok().body("Succeed");

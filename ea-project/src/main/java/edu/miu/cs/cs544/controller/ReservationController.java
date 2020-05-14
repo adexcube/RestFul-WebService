@@ -40,20 +40,6 @@ public class ReservationController {
         }
     }
 
-
-    @GetMapping("/my-reservation")
-    public ResponseEntity getMyReservation(@PathVariable int userId) {
-        try {
-//            reservationService.getByConsumerId(userId);
-            return ResponseEntity.status(HttpStatus.OK).body(appointmentService.getAllAppointments());
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed");
-        }
-    }
-
-
-
-
     @GetMapping("/{appointId}")
     public ResponseEntity reserveAppointment(@PathVariable int userId, @PathVariable int appointId) {
         try {
