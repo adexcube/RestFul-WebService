@@ -29,8 +29,9 @@ public class UserRoleServiceImpl implements UserRoleService {
 	}
 
 	@Override
-	public void createUserRole(UserRole userrole) {
-		// TODO Auto-generated method stub
+	public String createUserRole(UserRole userrole) {
+		userRoleRepository.save(userrole);
+		return "User Role created Successfully";
 		
 	}
 
