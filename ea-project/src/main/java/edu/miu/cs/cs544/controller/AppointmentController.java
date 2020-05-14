@@ -28,7 +28,7 @@ public class AppointmentController {
 	@ResponseBody
 	//create appointment controller method
 	@PostMapping(value = "new/{id}")
-	public ResponseEntity<Appointment> createAppoinment(@PathVariable int id, @RequestParam("date") String date, 
+	public ResponseEntity createAppoinment(@PathVariable int id, @RequestParam("date") String date, 
 							@RequestParam("location") String location, @RequestParam("time") String time) {
 		try {
 			User user = userService.getUserById(id);
@@ -36,12 +36,13 @@ public class AppointmentController {
 			if(user != null) {
 				appointment.setProvider(user);
 				appointmentService.createAppointment(appointment);
-				return ResponseEntity.ok().body(appointment);
+				return ResponseEntity.ok().body("Succeed");
 			} else {
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed");
 			}
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(null);
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(e.getMessage());
 		}
 	}
 
@@ -64,12 +65,12 @@ public class AppointmentController {
 	}
 	
 	@DeleteMapping
-	public ResponseEntity<Appointment> deleteAppointment(@RequestParam int id) {
+	public ResponseEntity deleteAppointment(@RequestParam int id) {
 		try {
 			appointmentService.deleteAppointment(id);
+			return ResponseEntity.ok().body(null);
 		} catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
 		}
-		return ResponseEntity.ok().body(null);
 	}
 }
