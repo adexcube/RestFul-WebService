@@ -14,20 +14,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static edu.miu.cs.cs544.util.Database.getConnection;
+
 public class Util {
 
-	public static Connection getConnection() {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cs544", "ea", "ea123");
 
-		} catch (Exception e) {
-
-			System.out.println(e);
-		}
-		return con;
-	}
 
 	public static SimpleDateFormat _12HourSDF = new SimpleDateFormat("hh:mm a");
 	public static SimpleDateFormat _24HourSDF = new SimpleDateFormat("HH:mm");
