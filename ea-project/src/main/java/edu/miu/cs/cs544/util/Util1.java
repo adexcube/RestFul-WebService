@@ -170,26 +170,37 @@ public class Util1 {
                     }
                 }
 
-
-
                 System.out.println("========~22=====");
                 System.out.println(userid);
             } catch (Exception e){
                 System.err.println(e);
             }
 
-//            try {
-//                Connection con = getConnection();
-//                PreparedStatement ps = con.prepareStatement("insert into userrole (id, roleId, userId) values (?, ?, ?)");
-//                ps.setString(1, null);
-//                ps.setInt(2, Role.STUDENT.getNumVal());
-//                ps.setInt(3, userid);
-//
-//                int i = ps.executeUpdate();
-//                System.out.println(i + " records userrole 2");
-//            } catch (Exception e){
-//                System.err.println(e);
-//            }
+            for(int i = 0; i < 3; i ++) {
+                try {
+                    Connection con = getConnection();
+                    PreparedStatement ps = con.prepareStatement("insert into userrole (id, roleId, userId) values (?, ?, ?)");
+                    ps.setString(1, null);
+                    if(i == 0) {
+                        ps.setInt(2, Role.ADMIN.getNumVal());
+                    } else if (i == 1) {
+                        ps.setInt(2, Role.CHECKER.getNumVal());
+                    } else if (i == 2){
+                        ps.setInt(2, Role.STUDENT.getNumVal());
+                    }
+                    ps.setInt(2, Role.STUDENT.getNumVal());
+                    ps.setInt(3, userid);
+
+                    int j = ps.executeUpdate();
+                    System.out.println(j + " records userrole 2");
+                } catch (Exception e){
+                    System.err.println(e);
+                }
+            }
+
+
+
+
 
 
 
