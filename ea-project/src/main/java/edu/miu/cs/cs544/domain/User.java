@@ -1,5 +1,7 @@
 package edu.miu.cs.cs544.domain;
 
+import org.springframework.jdbc.core.RowCallbackHandler;
+
 import java.util.List;
 
 import javax.persistence.*;
@@ -41,7 +43,7 @@ public class User {
 	}
 
 	public User(String firstname, String lastname, @Email String email, String gender, String username,
-			String password,List<UserRole> roles) {
+			String password) {
 
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -49,7 +51,6 @@ public class User {
 		this.gender = gender;
 		this.username = username;
 		this.password = password;
-		this.roles = roles;
 	}
 
 	public int getId() {
@@ -92,9 +93,6 @@ public class User {
 		this.gender = gender;
 	}
 
-	public String getUsername() {
-		return username;
-	}
 
 	public void setUsername(String username) {
 		this.username = username;
@@ -110,5 +108,9 @@ public class User {
 
 	public void addRole(UserRole role) {
 		this.roles.add(role);
+	}
+
+	public String getUsername() {
+		return username;
 	}
 }
