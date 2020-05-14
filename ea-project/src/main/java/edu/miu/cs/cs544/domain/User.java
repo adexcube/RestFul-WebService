@@ -26,16 +26,16 @@ public class User {
 	@NotEmpty
 	private String password;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name ="userId")
-	private List<UserRole> roles;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name ="role_id")
+	private UserRole role;
 
-	public List<UserRole> getRoles() {
-		return roles;
+	public UserRole getRole() {
+		return role;
 	}
 
-	public void setRoles(List<UserRole> roles) {
-		this.roles = roles;
+	public void setRole(UserRole role) {
+		this.role = role;
 	}
 
 	public User() {
@@ -104,10 +104,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public void addRole(UserRole role) {
-		this.roles.add(role);
 	}
 
 	public String getUsername() {

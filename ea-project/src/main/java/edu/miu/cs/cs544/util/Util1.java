@@ -47,11 +47,11 @@ public class Util1 {
 //        List<UserRole> roles = new ArrayList<>();
 //        roles.add(new UserRole("Checker"));
 
-
+        
         User checker = new User("Checker", "Doe", "johndoe@gmail.com", "Male", "John", "123");
         try {
             Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("insert into user (id, firstname, lastname, email, gender, username, password) values (?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement ps = con.prepareStatement("insert into user (id, firstname, lastname, email, gender, username, password,role_id) values (?, ?, ?, ?, ?, ?, ?, ?)");
 
             ps.setString(1, null);
             ps.setString(2, checker.getFirstname());
@@ -60,6 +60,7 @@ public class Util1 {
             ps.setString(5, checker.getGender());
             ps.setString(6, checker.getUsername());
             ps.setString(7, checker.getPassword());
+            ps.setInt(8, Role.CHECKER.getNumVal());
 
             int i = ps.executeUpdate();
             System.out.println(i + " records");
@@ -87,19 +88,19 @@ public class Util1 {
 
 
 
-        try {
-//            insert into userrole (roleId, userId) values (?, ?)", Role.STUDENT.getNumVal(), checkerid
-            Connection con = getConnection();
-            PreparedStatement ps = con.prepareStatement("insert into userrole (id, roleId, userId) values (?, ?, ?)");
-            ps.setString(1, null);
-            ps.setInt(2, Role.CHECKER.getNumVal());
-            ps.setInt(3, checkerid);
-            System.out.println(checkerid);
-            int i = ps.executeUpdate();
-            System.out.println(i + " records userrole 1");
-        } catch (Exception e){
-            System.err.println(e);
-        }
+//        try {
+////            insert into userrole (roleId, userId) values (?, ?)", Role.STUDENT.getNumVal(), checkerid
+//            Connection con = getConnection();
+//            PreparedStatement ps = con.prepareStatement("insert into userrole (id, roleId, userId) values (?, ?, ?)");
+//            ps.setString(1, null);
+//            ps.setInt(2, Role.CHECKER.getNumVal());
+//            ps.setInt(3, checkerid);
+//            System.out.println(checkerid);
+//            int i = ps.executeUpdate();
+//            System.out.println(i + " records userrole 1");
+//        } catch (Exception e){
+//            System.err.println(e);
+//        }
 
         List<String> starts = null;
         try {
@@ -123,7 +124,7 @@ public class Util1 {
 
             try {
                 Connection con = getConnection();
-                PreparedStatement ps = con.prepareStatement("insert into user (id, firstname, lastname, email, gender, username, password) values (?, ?, ?, ?, ?, ?, ?)");
+                PreparedStatement ps = con.prepareStatement("insert into user (id, firstname, lastname, email, gender, username, password, role_id) values (?, ?, ?, ?, ?, ?, ?, ?)");
                 ps.setString(1, null);
                 ps.setString(2, user.getFirstname());
                 ps.setString(3, user.getLastname());
@@ -131,6 +132,7 @@ public class Util1 {
                 ps.setString(5, user.getGender());
                 ps.setString(6, user.getUsername());
                 ps.setString(7, user.getPassword());
+                ps.setInt(8, Role.STUDENT.getNumVal());
 
                 int i = ps.executeUpdate();
                 System.out.println(i + " records user 1");
@@ -147,18 +149,18 @@ public class Util1 {
                 System.err.println(e);
             }
 
-            try {
-                Connection con = getConnection();
-                PreparedStatement ps = con.prepareStatement("insert into userrole (id, roleId, userId) values (?, ?, ?)");
-                ps.setString(1, null);
-                ps.setInt(2, Role.STUDENT.getNumVal());
-                ps.setInt(3, userid);
-
-                int i = ps.executeUpdate();
-                System.out.println(i + " records userrole 2");
-            } catch (Exception e){
-                System.err.println(e);
-            }
+//            try {
+//                Connection con = getConnection();
+//                PreparedStatement ps = con.prepareStatement("insert into userrole (id, roleId, userId) values (?, ?, ?)");
+//                ps.setString(1, null);
+//                ps.setInt(2, Role.STUDENT.getNumVal());
+//                ps.setInt(3, userid);
+//
+//                int i = ps.executeUpdate();
+//                System.out.println(i + " records userrole 2");
+//            } catch (Exception e){
+//                System.err.println(e);
+//            }
 
 
 
@@ -193,13 +195,13 @@ public class Util1 {
 
             try {
                 Connection con = getConnection();
-                PreparedStatement ps = con.prepareStatement("insert into reservation (id, status, date, time, consumer, appointment) values (?, ?, ?, ?, ?, ?)");
+                PreparedStatement ps = con.prepareStatement("insert into reservation (id, status, date, time, consumer_id, appointment_id) values (?, ?, ?, ?, ?, ?)");
                 ps.setString(1, null);
-                ps.setObject(2, Status.PENDING);
+                ps.setInt(2, Status.PENDING.getNumVal());
                 ps.setString(3, LocalDate.now().toString());
                 ps.setString(4, LocalTime.now().toString());
-                ps.setObject(5, user);
-                ps.setObject(6, appointment);
+                ps.setObject(5, user.getId());
+                ps.setObject(6, appointment.getId());
 
                 int i = ps.executeUpdate();
                 System.out.println(i + " records reservation");
